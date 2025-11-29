@@ -1,26 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rishi | Full Stack Developer</title>
     <meta property="og:title" content="Rishi | Full Stack Developer" />
-    <meta property="og:description" content="Professional freelance web developer portfolio. specialized in full-stack development." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://replit.com/public/images/opengraph.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@replit" />
-    <meta name="twitter:title" content="Rishi | Full Stack Developer" />
-    <meta name="twitter:description" content="Professional freelance web developer portfolio." />
-    <meta name="twitter:image" content="https://replit.com/public/images/opengraph.png" />
-
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta property="og:description" content="Professional freelance web developer portfolio." />
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- Icons (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar glass">
+        <div class="container nav-container">
+            <a href="/" class="logo">Rishi<span class="dot">.</span></a>
+            
+            <ul class="nav-links">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/projects.html">Projects</a></li>
+                <li><a href="/#services">Services</a></li>
+                <li><a href="/#contact">Contact</a></li>
+                <li><a href="/login.html" class="btn btn-sm btn-outline">Admin</a></li>
+            </ul>
+
+            <div class="hamburger">
+                <i data-lucide="menu"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <a href="/">Home</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/#services">Services</a>
+        <a href="/#contact">Contact</a>
+        <a href="/login.html">Admin</a>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-bg-blob-1"></div>
+        <div class="hero-bg-blob-2"></div>
+        
+        <div class="container hero-content">
+            <span class="badge">Available for Freelance Projects</span>
+            <h1>Building Digital <br><span class="text-gradient">Experiences</span> That Matter</h1>
+            <p class="subtitle">I'm Rishi, a Full Stack Developer specializing in building exceptional digital experiences. Currently focused on building accessible, human-centered products.</p>
+            
+            <div class="cta-group">
+                <a href="/projects.html" class="btn btn-primary">View Projects <i data-lucide="arrow-right"></i></a>
+                <a href="#" class="btn btn-outline">Download CV <i data-lucide="download"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-card glass-card">
+                    <h3>Who am I?</h3>
+                    <p>I'm a passionate Full Stack Developer based in San Francisco. I have a strong foundation in web development and a keen eye for design.</p>
+                    <p>With over 5 years of experience, I've worked with startups and established companies to build scalable web applications.</p>
+                </div>
+                <div class="about-stats">
+                    <h2>Bridging the gap between <span class="text-gradient">Design</span> and <span class="text-gradient">Engineering</span></h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <h4>50+</h4>
+                            <p>Projects</p>
+                        </div>
+                        <div class="stat-separator"></div>
+                        <div class="stat-item">
+                            <h4>5+</h4>
+                            <p>Years</p>
+                        </div>
+                        <div class="stat-separator"></div>
+                        <div class="stat-item">
+                            <h4>100%</h4>
+                            <p>Satisfaction</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section bg-darker">
+        <div class="container">
+            <div class="section-header">
+                <h2>My Tech Stack</h2>
+                <p>Technologies I work with to bring ideas to life.</p>
+            </div>
+            <div class="skills-grid">
+                <!-- Skills injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Preview Section -->
+    <section id="projects-preview" class="section">
+        <div class="container">
+            <div class="section-header-row">
+                <div>
+                    <h2>Featured Projects</h2>
+                    <p>A selection of my recent work.</p>
+                </div>
+                <a href="/projects.html" class="link-arrow">View All <i data-lucide="arrow-right"></i></a>
+            </div>
+            
+            <div class="projects-grid" id="featured-projects">
+                <!-- Dynamic Projects -->
+                <div class="loading-spinner">Loading projects...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section bg-darker">
+        <div class="container">
+            <div class="section-header">
+                <h2>Services</h2>
+                <p>How I can help you succeed.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card glass-card">
+                    <div class="icon-box"><i data-lucide="code"></i></div>
+                    <h3>Web Development</h3>
+                    <p>Building fast, responsive, and secure websites using modern technologies.</p>
+                </div>
+                <div class="service-card glass-card">
+                    <div class="icon-box"><i data-lucide="palette"></i></div>
+                    <h3>UI/UX Design</h3>
+                    <p>Creating intuitive and visually appealing user interfaces.</p>
+                </div>
+                <div class="service-card glass-card">
+                    <div class="icon-box"><i data-lucide="server"></i></div>
+                    <h3>Backend Systems</h3>
+                    <p>Developing robust server-side logic and database architectures.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Client Testimonials</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card glass-card">
+                    <i data-lucide="quote" class="quote-icon"></i>
+                    <p class="quote-text">"Rishi is an exceptional developer. He delivered our project on time and exceeded our expectations."</p>
+                    <div class="client-info">
+                        <div class="client-avatar gradient-1"></div>
+                        <div>
+                            <h4>Alex Johnson</h4>
+                            <p>CEO, TechStart</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card glass-card">
+                    <i data-lucide="quote" class="quote-icon"></i>
+                    <p class="quote-text">"Working with Rishi was a pleasure. His attention to detail is unmatched."</p>
+                    <div class="client-info">
+                        <div class="client-avatar gradient-2"></div>
+                        <div>
+                            <h4>Emily Davis</h4>
+                            <p>PM, CreativeCo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section relative">
+        <div class="contact-blob"></div>
+        <div class="container">
+            <div class="contact-wrapper glass-card">
+                <div class="contact-header">
+                    <span class="sub-label">Get in touch</span>
+                    <h2>Let's work together</h2>
+                </div>
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-full">Send Message <i data-lucide="send"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Rishi.</h3>
+                    <p>Building digital experiences with modern technologies.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="/">Home</a>
+                    <a href="/projects.html">Projects</a>
+                    <a href="/#services">Services</a>
+                    <a href="/#contact">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <h4>Connect</h4>
+                    <div class="social-icons">
+                        <a href="#"><i data-lucide="github"></i></a>
+                        <a href="#"><i data-lucide="linkedin"></i></a>
+                        <a href="#"><i data-lucide="twitter"></i></a>
+                        <a href="#"><i data-lucide="mail"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Rishi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/mock-backend.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
 </html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Rishi</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar glass">
+        <div class="container nav-container">
+            <a href="/" class="logo">Rishi<span class="dot">.</span></a>
+            <div class="flex-center gap-4">
+                <span class="badge">Admin Mode</span>
+                <button id="logout-btn" class="btn btn-sm btn-danger"><i data-lucide="log-out"></i> Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-20">
+        <div class="container">
+            <div class="dashboard-header mb-8">
+                <h1>Dashboard</h1>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="projects"><i data-lucide="layout"></i> Projects</button>
+                <button class="tab-btn" data-tab="messages"><i data-lucide="mail"></i> Messages</button>
+            </div>
+
+            <div id="projects-tab" class="tab-content active">
+                <div class="flex-between mb-6">
+                    <h3>Manage Projects</h3>
+                    <button class="btn btn-primary btn-sm"><i data-lucide="plus"></i> Add Project</button>
+                </div>
+                <div class="admin-projects-list" id="admin-projects">
+                    <!-- Loaded via JS -->
+                </div>
+            </div>
+
+            <div id="messages-tab" class="tab-content">
+                <div class="flex-between mb-6">
+                    <h3>Inbox</h3>
+                </div>
+                <div class="messages-list" id="admin-messages">
+                    <!-- Loaded via JS -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/mock-backend.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        lucide.createIcons();
+        
+        // Admin Guard
+        if (!localStorage.getItem('token')) {
+            window.location.href = '/login.html';
+        }
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            window.location.href = '/login.html';
+        });
+
+        // Tab Switching
+        const tabs = document.querySelectorAll('.tab-btn');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
+            });
+        });
+
+        // Load Data
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Load Projects
+            const projects = await mockApi.projects.getAll();
+            const projectsContainer = document.getElementById('admin-projects');
+            projectsContainer.innerHTML = projects.map(p => `
+                <div class="glass-card p-4 flex-between mb-4">
+                    <div class="flex gap-4 items-center">
+                        <div class="w-16 h-16 bg-dark rounded overflow-hidden">
+                            <img src="${p.imageUrl}" class="w-full h-full object-cover" alt="${p.title}">
+                        </div>
+                        <div>
+                            <h4>${p.title}</h4>
+                            <p class="text-sm text-gray">${p.description.substring(0, 50)}...</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="btn-icon"><i data-lucide="edit"></i></button>
+                        <button class="btn-icon text-danger" onclick="deleteProject(${p.id})"><i data-lucide="trash-2"></i></button>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+
+            // Load Messages
+            const messages = await mockApi.messages.getAll();
+            const messagesContainer = document.getElementById('admin-messages');
+            messagesContainer.innerHTML = messages.map(m => `
+                <div class="glass-card p-6 mb-4">
+                    <div class="flex-between mb-2">
+                        <div>
+                            <h4 class="text-white">${m.name}</h4>
+                            <p class="text-primary text-sm">${m.email}</p>
+                        </div>
+                        <span class="text-xs text-gray">${new Date(m.createdAt).toLocaleDateString()}</span>
+                    </div>
+                    <p class="text-gray mt-4">${m.message}</p>
+                </div>
+            `).join('');
+        });
+
+        async function deleteProject(id) {
+            if(confirm('Delete this project?')) {
+                await mockApi.projects.delete(id);
+                location.reload(); // Simple reload to refresh state
+            }
+        }
+    </script>
+</body>
+</html>

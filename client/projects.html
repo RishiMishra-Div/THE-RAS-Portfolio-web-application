@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Rishi</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- Icons (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar glass">
+        <div class="container nav-container">
+            <a href="/" class="logo">Rishi<span class="dot">.</span></a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/projects.html" class="active">Projects</a></li>
+                <li><a href="/#services">Services</a></li>
+                <li><a href="/#contact">Contact</a></li>
+                <li><a href="/login.html" class="btn btn-sm btn-outline">Admin</a></li>
+            </ul>
+            <div class="hamburger">
+                <i data-lucide="menu"></i>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <a href="/">Home</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/#services">Services</a>
+        <a href="/#contact">Contact</a>
+        <a href="/login.html">Admin</a>
+    </div>
+
+    <main class="pt-32 pb-20">
+        <div class="container">
+            <div class="page-header text-center mb-16">
+                <h1>All <span class="text-gradient">Projects</span></h1>
+                <p class="subtitle">A collection of my work, side projects, and experiments.</p>
+            </div>
+
+            <div class="projects-grid" id="all-projects">
+                <!-- Dynamic Content -->
+                <div class="loading-spinner">Loading projects...</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom text-center">
+                <p>&copy; 2025 Rishi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/mock-backend.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        lucide.createIcons();
+        // Specific logic for projects page
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProjects('all-projects');
+        });
+    </script>
+</body>
+</html>

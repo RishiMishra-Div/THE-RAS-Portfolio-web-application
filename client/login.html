@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Rishi</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="flex-center min-h-screen relative overflow-hidden">
+    <div class="hero-bg-blob-1"></div>
+    
+    <div class="glass-card login-card">
+        <div class="login-header text-center">
+            <div class="icon-circle">
+                <i data-lucide="lock"></i>
+            </div>
+            <h2>Admin Login</h2>
+            <p>Enter credentials to access dashboard</p>
+        </div>
+
+        <form id="login-form" class="contact-form">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required placeholder="admin@example.com">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required placeholder="••••••••">
+            </div>
+            <div id="login-error" class="error-message hidden">Invalid credentials</div>
+            <button type="submit" class="btn btn-primary w-full">Sign In</button>
+        </form>
+        
+        <div class="text-center mt-4">
+            <a href="/" class="text-sm text-gray">Back to Home</a>
+        </div>
+    </div>
+
+    <script src="/js/mock-backend.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        lucide.createIcons();
+        
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const response = await mockApi.auth.login({ email, password });
+                if (response.token) {
+                    localStorage.setItem('token', response.token);
+                    window.location.href = '/admin.html';
+                }
+            } catch (error) {
+                const errorEl = document.getElementById('login-error');
+                errorEl.textContent = error.message;
+                errorEl.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
