@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | Rishi</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/modal.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -33,7 +34,7 @@
             <div id="projects-tab" class="tab-content active">
                 <div class="flex-between mb-6">
                     <h3>Manage Projects</h3>
-                    <button class="btn btn-primary btn-sm"><i data-lucide="plus"></i> Add Project</button>
+                    <button id="add-project-btn" class="btn btn-primary btn-sm"><i data-lucide="plus"></i> Add Project</button>
                 </div>
                 <div class="admin-projects-list" id="admin-projects">
                     <!-- Loaded via JS -->
@@ -50,6 +51,36 @@
             </div>
         </div>
     </main>
+
+    <!-- Project Modal -->
+    <div class="modal-overlay" id="project-modal">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h3 id="modal-title">Add Project</h3>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <form id="project-form">
+                <input type="hidden" id="project-id">
+                <div class="form-group">
+                    <label for="p-title">Title</label>
+                    <input type="text" id="p-title" required placeholder="Project Name">
+                </div>
+                <div class="form-group">
+                    <label for="p-desc">Description</label>
+                    <textarea id="p-desc" required placeholder="Brief description..." style="min-height: 80px;"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="p-tech">Tech Stack (comma separated)</label>
+                    <input type="text" id="p-tech" placeholder="React, Node.js, MongoDB">
+                </div>
+                <div class="form-group">
+                    <label for="p-image">Image URL</label>
+                    <input type="url" id="p-image" placeholder="https://example.com/image.jpg">
+                </div>
+                <button type="submit" class="btn btn-primary w-full">Save Project</button>
+            </form>
+        </div>
+    </div>
 
     <script src="/js/mock-backend.js"></script>
     <script src="/js/main.js"></script>
@@ -78,9 +109,62 @@
             });
         });
 
+        // Modal Logic
+        const modal = document.getElementById('project-modal');
+        const form = document.getElementById('project-form');
+        const addBtn = document.getElementById('add-project-btn');
+        const closeBtn = document.getElementById('close-modal');
+        
+        function openModal(mode, project = null) {
+            document.getElementById('modal-title').textContent = mode === 'edit' ? 'Edit Project' : 'Add Project';
+            
+            if (project) {
+                document.getElementById('project-id').value = project.id;
+                document.getElementById('p-title').value = project.title;
+                document.getElementById('p-desc').value = project.description;
+                document.getElementById('p-tech').value = project.techStack.join(', ');
+                document.getElementById('p-image').value = project.imageUrl;
+            } else {
+                form.reset();
+                document.getElementById('project-id').value = '';
+            }
+            
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+
+        addBtn.addEventListener('click', () => openModal('add'));
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) closeModal();
+        });
+
+        // Form Submit
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('project-id').value;
+            const projectData = {
+                title: document.getElementById('p-title').value,
+                description: document.getElementById('p-desc').value,
+                techStack: document.getElementById('p-tech').value.split(',').map(s => s.trim()),
+                imageUrl: document.getElementById('p-image').value || 'https://via.placeholder.com/800x600'
+            };
+
+            if (id) {
+                await mockApi.projects.update(parseInt(id), projectData);
+            } else {
+                await mockApi.projects.create(projectData);
+            }
+            
+            closeModal();
+            loadProjects(); // Refresh list
+        });
+
         // Load Data
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Load Projects
+        async function loadProjects() {
             const projects = await mockApi.projects.getAll();
             const projectsContainer = document.getElementById('admin-projects');
             projectsContainer.innerHTML = projects.map(p => `
@@ -95,14 +179,15 @@
                         </div>
                     </div>
                     <div class="flex gap-2">
-                        <button class="btn-icon"><i data-lucide="edit"></i></button>
+                        <button class="btn-icon" onclick='editProject(${JSON.stringify(p).replace(/'/g, "&#39;")})'><i data-lucide="edit"></i></button>
                         <button class="btn-icon text-danger" onclick="deleteProject(${p.id})"><i data-lucide="trash-2"></i></button>
                     </div>
                 </div>
             `).join('');
             lucide.createIcons();
+        }
 
-            // Load Messages
+        async function loadMessages() {
             const messages = await mockApi.messages.getAll();
             const messagesContainer = document.getElementById('admin-messages');
             messagesContainer.innerHTML = messages.map(m => `
@@ -117,14 +202,23 @@
                     <p class="text-gray mt-4">${m.message}</p>
                 </div>
             `).join('');
-        });
+        }
 
-        async function deleteProject(id) {
+        // Global Actions
+        window.editProject = (project) => openModal('edit', project);
+        
+        window.deleteProject = async (id) => {
             if(confirm('Delete this project?')) {
                 await mockApi.projects.delete(id);
-                location.reload(); // Simple reload to refresh state
+                loadProjects();
             }
-        }
+        };
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProjects();
+            loadMessages();
+        });
     </script>
 </body>
 </html>

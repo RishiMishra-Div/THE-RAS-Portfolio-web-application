@@ -1,81 +1,62 @@
-# Rishi - Full Stack Developer Portfolio
+# Rishi - Student Developer Portfolio
 
-A professional, high-performance portfolio website built with vanilla HTML, CSS, and JavaScript. Designed to showcase development skills, projects, and services with a modern, polished aesthetic.
+This is a personal portfolio website built to showcase my journey as a Full Stack Developer. It demonstrates my skills in the MERN stack (MongoDB, Express, React, Node.js) and basic web technologies.
 
-## 🚀 Features
+**Note:** This version uses a **Mock Backend** to simulate API calls and database interactions entirely in the browser for demonstration purposes.
 
-- **Modern Design**: Custom "Indigo to Cyan" gradient theme with glassmorphism effects.
-- **Responsive Layout**: Fully mobile-friendly with a custom hamburger menu and fluid grids.
-- **Vanilla Stack**: No frontend frameworks (React/Vue/Angular) - just pure, fast DOM manipulation.
-- **Admin Dashboard**: Protected area to manage projects and view contact messages.
-- **Mock Backend**: Client-side simulation of a Node.js/Express API with JWT authentication.
-- **Dynamic Content**: Projects and skills are rendered dynamically via JavaScript.
+## 🚀 Real Features
+
+- **Honest & Transparent**: Reflects my actual status as a student developer from Surat.
+- **Responsive Design**: Works smoothly on mobile, tablet, and desktop.
+- **Project Showcase**: Displays real projects I've worked on (Library Manager, Weather App, etc.).
+- **Admin Dashboard**: A protected area (simulated) to manage projects and view messages.
+- **Contact Form**: Simulates sending emails and storing messages.
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: HTML5, CSS3 (Variables, Flexbox, Grid), JavaScript (ES6+)
+- **Frontend**: HTML5, CSS3, JavaScript (Vanilla ES6+)
+- **Styling**: Custom CSS with Glassmorphism effects
 - **Icons**: Lucide Icons
-- **Fonts**: Inter (Body) & Montserrat (Headings)
-- **Backend (Simulated)**: Mock API handling CRUD operations and Auth
+- **Backend Simulation**: Custom JavaScript logic to mimic REST API behavior
 
 ## 📂 Project Structure
 
 ```
 /public
   /css
-    style.css       # Global styles and variables
+    style.css       # Global styles
   /js
-    main.js         # DOM manipulation and UI logic
-    mock-backend.js # Simulated API and Database
-  index.html        # Landing page
-  projects.html     # Projects list
-  admin.html        # Protected dashboard
-  login.html        # Admin authentication
-  404.html          # Error page
+    main.js         # UI Logic
+    mock-backend.js # Simulated API (Data & Auth)
+  index.html        # Home Page
+  projects.html     # Projects Page
+  admin.html        # Admin Dashboard (Protected)
+  login.html        # Admin Login
 ```
-
-## 🔧 Setup & Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/portfolio.git
-   cd portfolio
-   ```
-
-2. **Environment Variables**
-   Copy the example environment file (for the future backend):
-   ```bash
-   cp .env.example .env
-   ```
-
-3. **Run Locally**
-   Since this is a static site, you can open `index.html` directly in your browser or serve it with a simple server:
-   ```bash
-   # using python
-   python3 -m http.server
-   
-   # using node
-   npx serve .
-   ```
 
 ## 🔐 Admin Access
 
-To test the restricted Admin Dashboard:
-1. Go to `/login.html`
-2. Email: `admin@example.com`
-3. Password: `password`
+You can test the admin features using these credentials:
+- **URL**: `/login.html`
+- **Email**: `admin@example.com`
+- **Password**: `password`
 
-## 📝 Backend API (Planned/Simulated)
+## 🏃‍♂️ How to Run
 
-The `js/mock-backend.js` file simulates the following Node.js/Express endpoints:
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/yourusername/portfolio.git
+   ```
+2. **Open `index.html`**
+   You can simply open the file in your browser, or use a live server extension.
 
-- `GET /api/projects` - Fetch all projects
-- `POST /api/projects` - Create new project (Protected)
-- `DELETE /api/projects/:id` - Delete project (Protected)
-- `GET /api/messages` - Get contact form messages (Protected)
-- `POST /api/contact` - Submit new message
-- `POST /api/auth/login` - Authenticate admin
+## 🔜 Future Plans (Real Backend)
+
+In the future, I plan to connect this frontend to a real Node.js/Express backend:
+- [ ] Connect to MongoDB Atlas
+- [ ] Implement real JWT authentication
+- [ ] Set up Nodemailer for actual email delivery
 
 ## 📄 License
 
-MIT License - feel free to use this as a template for your own portfolio!
+MIT License.
