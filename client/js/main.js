@@ -1,4 +1,39 @@
-// Main DOM Logic for Vanilla JS Implementation
+// Theme Toggle Logic
+const themeToggle = document.createElement('button');
+themeToggle.className = 'theme-toggle';
+themeToggle.innerHTML = '<i data-lucide="sun"></i>';
+themeToggle.setAttribute('aria-label', 'Toggle Theme');
+
+// Add to navbar
+const navbar = document.querySelector('.nav-container');
+if (navbar) {
+    // Insert before hamburger or at the end
+    const hamburger = document.querySelector('.hamburger');
+    if(hamburger) {
+        navbar.insertBefore(themeToggle, hamburger);
+    } else {
+        navbar.appendChild(themeToggle);
+    }
+}
+
+// Check saved theme
+const savedTheme = localStorage.getItem('theme') || 'dark';
+document.documentElement.setAttribute('data-theme', savedTheme);
+updateThemeIcon(savedTheme);
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+    lucide.createIcons();
+});
+
+function updateThemeIcon(theme) {
+    themeToggle.innerHTML = theme === 'dark' ? '<i data-lucide="sun"></i>' : '<i data-lucide="moon"></i>';
+}
 
 // Mobile Menu Toggle
 const hamburger = document.querySelector('.hamburger');
@@ -16,7 +51,7 @@ if (skillsGrid && typeof skills !== 'undefined') {
     skillsGrid.innerHTML = skills.map(skill => `
         <div class="glass-card skill-card">
             <i data-lucide="${skill.icon}" class="skill-icon"></i>
-            <span class="font-medium text-gray-300">${skill.name}</span>
+            <span class="font-medium text-muted">${skill.name}</span>
         </div>
     `).join('');
 }
