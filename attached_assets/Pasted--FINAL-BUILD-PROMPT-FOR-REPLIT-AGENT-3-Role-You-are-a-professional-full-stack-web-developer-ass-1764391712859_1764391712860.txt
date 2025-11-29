@@ -1,0 +1,125 @@
+🚀 FINAL BUILD PROMPT FOR REPLIT AGENT 3
+Role:
+You are a professional full-stack web developer assistant. Build a complete production-ready freelance portfolio web application for a developer using only:
+•	HTML
+•	CSS
+•	JavaScript (Vanilla DOM, NO frameworks)
+•	Node.js + Express
+•	MongoDB with Mongoose
+•	JWT Authentication
+•	Nodemailer (for contact form)
+Do NOT use React, Next.js, Vue, Angular, EJS, Handlebars, templating engines, or any frontend frameworks/libraries.
+________________________________________
+🎨 Design Requirements
+•	Modern freelance-friendly gradient theme
+•	Primary palette: Purple → Blue gradient
+•	Rounded corners, subtle shadows, smooth animations
+•	Typography:
+o	Headings: Montserrat
+o	Body Font: Inter
+•	Use clean spacing, glassmorphism cards where appropriate
+•	Responsive layout (mobile, tablet, desktop)
+________________________________________
+🏗️ Frontend Structure
+Create the following frontend pages inside a /public directory:
+File	Purpose
+index.html	Home page with hero, skills, projects preview, services, testimonials, contact CTA
+projects.html	Full list of projects dynamically loaded from backend
+admin.html	Admin dashboard to manage login, projects, and messages
+login.html	Admin login page
+404.html	Custom error page
+Components inside pages:
+Homepage Sections
+1.	Navigation bar + sticky + mobile hamburger menu
+2.	Hero Section: headline + subheadline + CTA buttons
+3.	About Section
+4.	Skills Section (grid with icons)
+5.	Projects Preview Section (load dynamically from backend via fetch)
+6.	Services Section (cards with CTA buttons)
+7.	Testimonials Section (static for now, editable later)
+8.	Contact Section with form (send to backend API)
+9.	Footer with quick links and social icons
+________________________________________
+🔧 Backend Requirements
+Create a Node.js Express server with the following features:
+Routes
+Route	Method	Purpose	Protection
+/api/projects	GET	Fetch all projects	Public
+/api/projects/:id	GET	Fetch single project	Public
+/api/projects	POST	Create project	Protected (JWT)
+/api/projects/:id	PUT	Update project	Protected (JWT)
+/api/projects/:id	DELETE	Delete project	Protected (JWT)
+/api/contact	POST	Submit contact form (store + send email)	Public
+/api/messages	GET	Fetch submitted messages	Protected
+/api/auth/login	POST	Login and return JWT	Public
+/api/auth/verify	GET	Verify valid token	Protected
+Models
+1.	User → email, password hash (bcrypt)
+2.	Project → title, description, tech stack, image URL, live link, GitHub link, createdAt
+3.	Message → name, email, message, createdAt
+________________________________________
+🔐 Authentication (JWT)
+•	Use bcrypt to hash admin password
+•	On successful login, return JWT
+•	Admin panel should check token before showing content
+•	Store token in localStorage (NOT cookies)
+________________________________________
+✉️ Email System (Nodemailer)
+When a user submits the contact form:
+•	Save message in MongoDB
+•	Send an email to admin inbox
+•	Send auto-reply to user:
+Hi 👋
+
+Thanks for reaching out! I received your message — I will get back to you within 24 hours.
+
+Regards,
+Rishi
+________________________________________
+📁 Folder Structure
+/public
+  /css
+  /js
+  /assets
+  index.html
+  login.html
+  admin.html
+  projects.html
+/server
+  /routes
+  /controllers
+  /models
+  /middleware
+  config.js
+server.js
+.env
+________________________________________
+🧪 Admin Dashboard Features
+Inside admin.html, implement:
+•	Login form → upon success redirect to dashboard
+•	Create/Edit/Delete project entries
+•	View contact messages
+•	Logout button (clears token)
+All actions must use JWT protected API calls.
+________________________________________
+📦 Deployment-Ready
+•	Include a README.md explaining all features and installation steps
+•	Add environment variable usage (MONGO_URI, JWT_SECRET, EMAIL, EMAIL_PASS)
+•	Ensure CORS enabled
+•	Optimize images
+•	Handle error responses gracefully
+•	Add 404 and fallback routes
+________________________________________
+⭐ Final Objective
+Build this as if it will be reviewed by:
+•	Recruiters
+•	Freelance clients
+•	Technical hiring managers
+It must look polished, professional, mobile-friendly, secure, and fast.
+________________________________________
+When finished, provide:
+•	Live preview link (local instructions first)
+•	List of all API endpoints
+•	Admin credentials placeholder setup
+•	A summary of how everything works
+
