@@ -799,3 +799,58 @@ body {
         flex-direction: column;
     }
 }
+
+/* css for mesage sent notification */
+
+#contact-success, #contact-error {
+    padding: 12px 16px;
+    margin-top: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+#contact-success {
+    background: #d1f7d6;
+    color: #125f2e;
+    border-left: 4px solid #26c96b;
+}
+
+#contact-error {
+    background: #ffe0df;
+    color: #8b1c16;
+    border-left: 4px solid #ff544c;
+}
+
+.hidden {
+    display: none;
+}
+
+button.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 3px solid rgba(255,255,255,0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+#contact-success, #contact-error {
+    transition: opacity 0.3s ease;
+}

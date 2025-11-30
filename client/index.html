@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- CSS -->
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     
     <!-- Icons (Lucide) -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -27,7 +27,7 @@
             
             <ul class="nav-links">
                 <li><a href="/" class="active">Home</a></li>
-                <li><a href="./projects.html">Projects</a></li>
+                <li><a href="/client/projects">Projects</a></li>
                 <li><a href="/#services">Services</a></li>
                 <li><a href="/#contact">Contact</a></li>
                 <li><a href="/api/admin" class="btn btn-sm btn-outline">Admin</a></li>
@@ -186,7 +186,7 @@
                     <h2>Let's work together</h2>
                     <p style="margin-top: 1rem; color: var(--text-gray);">Feel free to reach out for collaborations or just a friendly hello!</p>
                 </div>
-                <form id="contact-form" class="contact-form">
+                <form id="contact-form" class="contact-form" method="post" action="/api/contact">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" placeholder="Your Name" required>
@@ -200,6 +200,9 @@
                         <textarea id="message" name="message" placeholder="How can I help you?" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary w-full">Send Message <i data-lucide="send"></i></button>
+                    <div id="contact-success" class="hidden"></div>
+                    <div id="contact-error" class="hidden"></div>
+
                 </form>
             </div>
         </div>
@@ -216,7 +219,7 @@
                 <div class="footer-links">
                     <h4>Quick Links</h4>
                     <a href="/">Home</a>
-                    <a href="./projects.html">Projects</a>
+                    <a href="/client/projects">Projects</a>
                     <a href="/#services">Services</a>
                     <a href="/#contact">Contact</a>
                 </div>

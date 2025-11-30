@@ -99,24 +99,74 @@ if (featuredProjects) {
     loadProjects('featured-projects', 3);
 }
 
-// Contact Form Handling
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const btn = contactForm.querySelector('button[type="submit"]');
-        const originalText = btn.innerHTML;
-        
-        btn.disabled = true;
-        btn.innerHTML = 'Sending...';
 
-        // Simulate API call
+const form = document.getElementById("contact-form");
+const successBox = document.getElementById("contact-success");
+const errorBox = document.getElementById("contact-error");
+
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const btn = form.querySelector('button[type="submit"]');
+    const originalBtnText = btn.innerHTML;
+
+    const formData = {
+        name: document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        message: document.getElementById("message").value.trim()
+    };
+
+    // ---- UI: Show sending state ----
+    btn.disabled = true;
+    btn.classList.add("loading");
+    btn.innerHTML = `<span class="spinner"></span> Sending...`;
+
+    // Hide previous alerts
+    successBox.classList.add("hidden");
+    errorBox.classList.add("hidden");
+
+    try {
+        const res = await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData)
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            // Show success message
+            successBox.textContent = "Message sent successfully! we will reach out sortly";
+            successBox.classList.remove("hidden");
+
+            // Clear form with small delay for natural flow
+            setTimeout(() => form.reset(), 500);
+            // Auto fade-out
+            setTimeout(() => {
+                successBox.style.opacity = "0";
+                setTimeout(() => {
+                    successBox.classList.add("hidden");
+                    successBox.style.opacity = "1"; // reset for next time
+                }, 300);
+            }, 5000);
+
+
+        } else {
+            errorBox.textContent = data.message || "Something went wrong. Try again.";
+            errorBox.classList.remove("hidden");
+        }
+
+    } catch (err) {
+        errorBox.textContent = "⚠ Unexpected error. Please try later.";
+        errorBox.classList.remove("hidden");
+
+    } finally {
+        // ---- Reset button ----
         setTimeout(() => {
-            alert('Message sent successfully! (Mock)');
-            contactForm.reset();
             btn.disabled = false;
-            btn.innerHTML = originalText;
-            lucide.createIcons(); // re-init icon in button
-        }, 1500);
-    });
-}
+            btn.classList.remove("loading");
+            btn.innerHTML = originalBtnText;
+            lucide.createIcons(); // refresh icons if button has one
+        }, 1200);
+    }
+});
