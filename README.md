@@ -35,13 +35,6 @@ This is a personal portfolio website built to showcase my journey as a Full Stac
   login.html        # Admin Login
 ```
 
-## 🔐 Admin Access
-
-You can test the admin features using these credentials:
-- **URL**: `/login.html`
-- **Email**: `admin@example.com`
-- **Password**: `password`
-
 ## 🏃‍♂️ How to Run
 
 1. **Clone the repo**
