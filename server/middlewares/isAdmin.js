@@ -16,6 +16,7 @@ module.exports.isAdmin = async (req , res , next)=>{
             id : decoded.id,
             email : decoded.email
         }
+        next();
             
     } catch (error) {
         return res.status(401).json({ success: false, message: 'authorization denied' });

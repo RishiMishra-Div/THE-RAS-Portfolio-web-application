@@ -37,11 +37,9 @@
             <a href="/" class="text-sm text-gray">Back to Home</a>
         </div>
     </div>
-
-    <script src="./js/mock-backend.js"></script>
-    <script src="./js/main.js"></script>
     <script>
         lucide.createIcons();
+        const API_BASE_URL = '/api'
         
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -49,10 +47,17 @@
             const password = document.getElementById('password').value;
             
             try {
-                const response = await mockApi.auth.login({ email, password });
-                if (response.token) {
-                    localStorage.setItem('token', response.token);
-                    window.location.href = '/admin.html';
+                const response = await fetch(`${API_BASE_URL}/admin/adminLogin`, {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password }),
+                    credentials: "include"
+                });
+  
+                if (response.ok) {
+                    window.location.href = '/api/admin';
                 }
             } catch (error) {
                 const errorEl = document.getElementById('login-error');
