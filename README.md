@@ -19,6 +19,7 @@ This is a personal portfolio website built to showcase my journey as a Full Stac
 - **Icons**: Lucide Icons
 - **Backend Simulation**: Custom JavaScript logic to mimic REST API behavior
 
+
 ## 📂 Project Structure
 
 ```
