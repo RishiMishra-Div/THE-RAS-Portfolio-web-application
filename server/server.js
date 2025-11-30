@@ -3,7 +3,10 @@ const app = express();
 port = 3000;
 
 const path = require('path');
-const { dirname } = require('path/posix');
+
+// call db
+const db = require('./config/mongodbConnection');
+
 
 // serve static file middelewares
 app.use(express.static(path.join(__dirname , '../client')))
@@ -28,4 +31,6 @@ app.get('/client/admin' , (req,res)=>{
 
 
 
-app.listen(port);
+app.listen(port, (re,res)=>{
+    console.log(`server running on ${port}`);
+});
