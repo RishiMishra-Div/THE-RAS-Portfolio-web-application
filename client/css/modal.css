@@ -55,3 +55,87 @@
 .close-modal:hover {
     color: white;
 }
+
+
+/* extra modal css */
+/* Make modal scrollable when content is large */
+.modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Markdown container styling */
+.markdown-container {
+    background: rgba(255, 246, 246, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+.markdown-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color:  rgb(255, 254, 254);
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.markdown-preview {
+    margin-top: 15px;
+    padding: 18px;
+    background: #fff;
+    color: #010101;
+    border-radius: 10px;
+    min-height: 150px;
+    font-size: 16px;
+}
+
+/* Make SimpleMDE toolbar icons visible in dark mode */
+.editor-toolbar {
+    background: #111827 !important;
+    border-color: rgba(255,255,255,0.15) !important;
+}
+
+.editor-toolbar button {
+    filter: invert(1);
+    transition: 0.2s ease;
+}
+
+.editor-toolbar button:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+}
+
+/* Toolbar background */
+.editor-toolbar {
+    background: #000000 !important;
+    border-color: rgba(255,255,255,0.1) !important;
+}
+
+.editor-toolbar a.active,
+.editor-toolbar a:hover {
+    background: rgba(30, 30, 30, 0.1) !important;
+}
+
+/* Fix Editor Area Background to Match Modal */
+.CodeMirror {
+    background: #f9fcff !important;
+    color: rgb(54, 50, 50) !important;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+.CodeMirror * {
+    color: rgb(53, 49, 49) !important;
+}
+
+
+.editor-toolbar, .CodeMirror {
+    border-radius: 8px !important;
+}
+/* Style the status bar */
+.CodeMirror .CodeMirror-scroll {
+    max-height: 300px;
+}

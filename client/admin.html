@@ -6,8 +6,95 @@
     <title>Admin Dashboard | Rishi</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/modal.css">
+    <link rel="stylesheet" href="/css/project.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- SimpleMDE CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+     <style>
+        .markdown-section {
+            margin-top: 40px;
+            background: rgba(255,255,255,0.05);
+            padding: 25px;
+            border-radius: 16px;
+            backdrop-filter: blur (10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            }
+
+        .markdown-header {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }        
+
+        .markdown-actions {
+            text-align: right;
+            margin-top: 15px;
+        }        
+
+        #preview {
+            margin-top: 20px;
+            padding: 25px;
+            background: #ffffff;
+            border-radius: 12px;
+            min-height: 200px;
+            line-height: 1.6;
+            font-size: 16px;
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.08);
+        }        
+
+        /* Better typography for rendered markdown */
+        #preview h1, #preview h2, #preview h3 {
+            font-weight: 700;
+            margin-top: 20px;
+        }        
+
+        #preview ul {
+            padding-left: 20px;
+        }        
+
+        #preview table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }        
+
+        #preview table, #preview th, #preview td {
+            border: 1px solid #ddd;
+        }        
+
+        #preview th, #preview td {
+            padding: 10px;
+        }        
+
+        /* Button improvements */
+        .btn.save-btn {
+            background: #1E88E5;
+            padding: 10px 18px;
+            border-radius: 6px;
+            transition: 0.2s;
+        }        
+
+        .btn.save-btn:hover {
+            background: #1565C0;
+        }        
+
+        /* Fix SimpleMDE to match UI width */
+        .CodeMirror, #editor {
+            min-height: 300px !important;
+            border-radius: 10px;
+        }        
+
+        .markdown-container {
+            max-width: 800px;
+            margin: auto;
+        } 
+
+    </style>
 </head>
 <body>
     <nav class="navbar glass">
@@ -60,30 +147,63 @@
                 <button class="close-modal" id="close-modal">&times;</button>
             </div>
             <form id="project-form">
-                <input type="hidden" id="project-id">
-                <div class="form-group">
-                    <label for="p-title">Title</label>
-                    <input type="text" id="p-title" required placeholder="Project Name">
-                </div>
-                <div class="form-group">
-                    <label for="p-desc">Description</label>
-                    <textarea id="p-desc" required placeholder="Brief description..." style="min-height: 80px;"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="p-tech">Tech Stack (comma separated)</label>
-                    <input type="text" id="p-tech" placeholder="React, Node.js, MongoDB">
-                </div>
-                <div class="form-group">
-                    <label for="p-image">Image URL</label>
-                    <input type="url" id="p-image" placeholder="https://example.com/image.jpg">
-                </div>
-                <button type="submit" class="btn btn-primary w-full">Save Project</button>
+            
+               <input type="hidden" id="project-id">
+            
+               <!-- Title -->
+               <div class="form-group">
+                   <label for="p-title">Project Title</label>
+                   <input type="text" id="p-title" required placeholder="Project Name">
+               </div>
+            
+               <!-- Short Description -->
+               <div class="form-group">
+                   <label for="p-desc">Short Description</label>
+                   <textarea id="p-desc" required placeholder="Brief project summary..." style="min-height: 80px;"></textarea>
+               </div>
+            
+               <!-- Markdown Editor -->
+               <div class="markdown-container">
+                   <h3 class="markdown-header">
+                       <i data-lucide="edit"></i> Detailed Description (Markdown)
+                   </h3>
+                   
+                   <textarea id="editor"></textarea>
+            
+                   <!-- Live Preview -->
+                   <h3 class="markdown-header" style="margin-top:20px;">
+                       <i data-lucide="eye"></i> Live Preview
+                   </h3>
+                   <div id="preview" class="markdown-preview">Start typing to see preview...</div>
+               </div>
+            
+               <!-- Tech Stack -->
+               <div class="form-group">
+                   <label for="p-tech">Tech Stack (comma separated)</label>
+                   <input type="text" id="p-tech" placeholder="React, Node.js, MongoDB">
+               </div>
+            
+               <!-- Image URL -->
+               <div class="form-group">
+                   <label for="p-image">Image URL</label>
+                   <input type="url" id="p-image" placeholder="https://example.com/image.jpg">
+               </div>
+            
+               <!-- Submit -->
+               <button type="submit" class="btn btn-primary w-full">Save Project</button>
             </form>
+            
         </div>
     </div>
-
+    <!-- SimpleMDE JavaScript -->
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    
+    <!-- Marked.js for Markdown Preview -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
     <script src="/js/mock-backend.js"></script>
     <script src="/js/main.js"></script>
+
     <script>
         lucide.createIcons();
         
@@ -104,10 +224,15 @@
         })();
 
 
+
+        // logout
         document.getElementById('logout-btn').addEventListener('click', () => {
             localStorage.removeItem('token');
             window.location.href = '/login.html';
         });
+
+
+
 
         // Tab Switching
         const tabs = document.querySelectorAll('.tab-btn');
@@ -121,83 +246,149 @@
             });
         });
 
-        // Modal Logic
-        const modal = document.getElementById('project-modal');
-        const form = document.getElementById('project-form');
-        const addBtn = document.getElementById('add-project-btn');
-        const closeBtn = document.getElementById('close-modal');
+
+        let editorInstance = null;
         
+        // Modal elements
+        const modal = document.getElementById("project-modal");
+        const projectForm = document.getElementById("project-form");
+        const addProjectBtn = document.getElementById("add-project-btn");
+        const closeModalBtn = document.getElementById("close-modal");
+        
+        // Create markdown editor only once
+        function loadMarkdownEditor() {
+            if (!editorInstance) {
+                editorInstance = new SimpleMDE({
+                    element: document.getElementById("editor"),
+                    spellChecker: false,
+                    placeholder: "Write detailed project description here..."
+                });
+        
+                // Live preview sync
+                editorInstance.codemirror.on("change", () => {
+                    document.getElementById("preview").innerHTML = marked.parse(editorInstance.value());
+                });
+            }
+        }
+        
+        // Open modal with add / edit mode
         function openModal(mode, project = null) {
-            document.getElementById('modal-title').textContent = mode === 'edit' ? 'Edit Project' : 'Add Project';
-            
+        
+            // Load editor only now (NOT on page load)
+            loadMarkdownEditor();
+        
+            document.getElementById("modal-title").textContent =
+                mode === "edit" ? "Edit Project" : "Add Project";
+        
             if (project) {
-                document.getElementById('project-id').value = project.id;
-                document.getElementById('p-title').value = project.title;
-                document.getElementById('p-desc').value = project.description;
-                document.getElementById('p-tech').value = project.techStack.join(', ');
-                document.getElementById('p-image').value = project.imageUrl;
+                // Editing: fill values
+                document.getElementById("project-id").value = project.id;
+                document.getElementById("p-title").value = project.title;
+                document.getElementById("p-desc").value = project.description;
+                document.getElementById("p-tech").value = project.techStack.join(", ");
+                document.getElementById("p-image").value = project.imageUrl;
+        
+                editorInstance.value(project.markdown || "");
+                document.getElementById("preview").innerHTML = marked.parse(project.markdown || "");
+        
             } else {
-                form.reset();
-                document.getElementById('project-id').value = '';
+                // New project: reset everything
+                projectForm.reset();
+                editorInstance.value("");
+                document.getElementById("preview").innerHTML = "Start typing to see preview...";
+                document.getElementById("project-id").value = "";
             }
-            
-            modal.classList.add('active');
+        
+            modal.classList.add("active");
         }
-
+        
+        // Close modal
         function closeModal() {
-            modal.classList.remove('active');
+            modal.classList.remove("active");
         }
 
-        addBtn.addEventListener('click', () => openModal('add'));
-        closeBtn.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => {
-            if(e.target === modal) closeModal();
-        });
 
-        // Form Submit
-        form.addEventListener('submit', async (e) => {
+        // Save form
+        projectForm.addEventListener("submit", async (e) => {
             e.preventDefault();
-            const id = document.getElementById('project-id').value;
-            const projectData = {
-                title: document.getElementById('p-title').value,
-                description: document.getElementById('p-desc').value,
-                techStack: document.getElementById('p-tech').value.split(',').map(s => s.trim()),
-                imageUrl: document.getElementById('p-image').value || 'https://via.placeholder.com/800x600'
+        
+            const projectId = document.getElementById("project-id").value;
+        
+            const newProjectData = {
+                title: document.getElementById("p-title").value.trim(),
+                description: document.getElementById("p-desc").value.trim(),
+                markdown: editorInstance.value(),
+                techStack: document.getElementById("p-tech").value.split(",").map(item => item.trim()),
+                imageUrl: document.getElementById("p-image").value || "https://via.placeholder.com/600x400"
             };
-
-            if (id) {
-                await mockApi.projects.update(parseInt(id), projectData);
-            } else {
-                await mockApi.projects.create(projectData);
-            }
+        
             
-            closeModal();
-            loadProjects(); // Refresh list
-        });
+            // Decide between add or edit
+            if (projectId) {
+                await fetch(`/api/projects/${projectId}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(newProjectData)
+                });
+            } else {
+                await fetch(`/api/projects`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(newProjectData)
+                });
+            }
 
-        // Load Data
-        async function loadProjects() {
-            const projects = await mockApi.projects.getAll();
-            const projectsContainer = document.getElementById('admin-projects');
+        
+            closeModal();
+            loadProjects(); // refresh UI
+        });
+        
+        // Button events
+        addProjectBtn.addEventListener("click", () => openModal("add"));
+        closeModalBtn.addEventListener("click", closeModal);
+        
+        // Close when clicking outside modal box
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) closeModal();
+        });
+        
+
+        // Load projects
+
+       async function loadProjects() {
+            const res = await fetch("/api/projects");
+            const projects = await res.json();
+        
+            const projectsContainer = document.getElementById("admin-projects");
             projectsContainer.innerHTML = projects.map(p => `
-                <div class="glass-card p-4 flex-between mb-4">
-                    <div class="flex gap-4 items-center">
-                        <div class="w-16 h-16 bg-dark rounded overflow-hidden">
-                            <img src="${p.imageUrl}" class="w-full h-full object-cover" alt="${p.title}">
-                        </div>
-                        <div>
-                            <h4>${p.title}</h4>
-                            <p class="text-sm text-gray">${p.description.substring(0, 50)}...</p>
+                <div class="project-card">
+            
+                    <img src="${p.imageUrl}" class="project-thumb" />
+            
+                    <div class="project-content">
+                        <h2 class="project-title">${p.title}</h2>
+                        <p class="project-desc">${p.description}</p>
+                        <p class="project-tech">${p.techStack.join(", ")}</p>
+            
+                        <div class="project-buttons">
+                            <button class="edit-btn" onclick='openModal("edit", ${JSON.stringify(p)})'>
+                                <i data-lucide="edit"></i> Edit
+                            </button>
+                            <button class="delete-btn" onclick="deleteProject('${p._id}')">
+                                <i data-lucide="trash"></i> Delete
+                            </button>
                         </div>
                     </div>
-                    <div class="flex gap-2">
-                        <button class="btn-icon" onclick='editProject(${JSON.stringify(p).replace(/'/g, "&#39;")})'><i data-lucide="edit"></i></button>
-                        <button class="btn-icon text-danger" onclick="deleteProject(${p.id})"><i data-lucide="trash-2"></i></button>
-                    </div>
+            
                 </div>
             `).join('');
+
+            
             lucide.createIcons();
         }
+
+
+
 
         async function loadMessages() {
             const messages = await mockApi.messages.getAll();
@@ -216,15 +407,21 @@
             `).join('');
         }
 
-        // Global Actions
-        window.editProject = (project) => openModal('edit', project);
-        
-        window.deleteProject = async (id) => {
-            if(confirm('Delete this project?')) {
-                await mockApi.projects.delete(id);
-                loadProjects();
+
+
+
+    
+    //   Delete project
+        async function deleteProject(id) {
+            if (confirm("Are you sure?")) {
+               await fetch(`/api/projects/${id}`, { method: "DELETE" });
+               loadProjects();
             }
-        };
+        }
+
+
+
+
 
         // Init
         document.addEventListener('DOMContentLoaded', () => {

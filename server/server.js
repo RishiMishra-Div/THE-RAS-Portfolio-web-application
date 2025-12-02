@@ -26,12 +26,14 @@ const db = require('./config/mongodbConnection');
 // require routes
 const adminRouter = require('./routes/adminRouter');
 const contactRouter = require('./routes/contactRouter')
+const projectRouter = require("./routes/projectRouter");
 
 
 
 // use routes
 app.use('/api/admin' , adminRouter);
 app.use('/api/contact' , contactRouter);
+app.use('/api/projects', projectRouter);
 
 
 
