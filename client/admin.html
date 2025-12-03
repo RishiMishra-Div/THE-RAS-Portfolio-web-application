@@ -282,7 +282,7 @@
         
             if (project) {
                 // Editing: fill values
-                document.getElementById("project-id").value = project.id;
+                document.getElementById("project-id").value = project._id;
                 document.getElementById("p-title").value = project.title;
                 document.getElementById("p-desc").value = project.description;
                 document.getElementById("p-tech").value = project.techStack.join(", ");
@@ -309,7 +309,7 @@
 
 
         // Save form
-        projectForm.addEventListener("submit", async (e) => {
+       projectForm.addEventListener("submit", async (e) => {
             e.preventDefault();
         
             const projectId = document.getElementById("project-id").value;
@@ -318,30 +318,35 @@
                 title: document.getElementById("p-title").value.trim(),
                 description: document.getElementById("p-desc").value.trim(),
                 markdown: editorInstance.value(),
-                techStack: document.getElementById("p-tech").value.split(",").map(item => item.trim()),
+                techStack: document.getElementById("p-tech").value.split(",")
+                    .map(item => item.trim())
+                    .filter(Boolean),
                 imageUrl: document.getElementById("p-image").value || "https://via.placeholder.com/600x400"
             };
         
-            
-            // Decide between add or edit
-            if (projectId) {
-                await fetch(`/api/projects/${projectId}`, {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(newProjectData)
-                });
-            } else {
-                await fetch(`/api/projects`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(newProjectData)
-                });
-            }
-
+            try {
+                const url = projectId ? `/api/projects/${projectId}` : `/api/projects`;
+                const method = projectId ? "PUT" : "POST";
         
-            closeModal();
-            loadProjects(); // refresh UI
+                const res = await fetch(url, {
+                    method,
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(newProjectData)
+                });
+        
+                if (!res.ok) throw new Error("Failed request");
+        
+                alert(projectId ? "Project Updated Successfully" : "Project Added Successfully");
+        
+                closeModal();
+                loadProjects();
+        
+            } catch (error) {
+                console.error(error);
+                alert("Something went wrong!");
+            }
         });
+        
         
         // Button events
         addProjectBtn.addEventListener("click", () => openModal("add"));

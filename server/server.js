@@ -46,6 +46,10 @@ app.get('/' , (req,res)=>{
 app.get('/client/projects' , (req,res)=>{
     res.sendFile(path.join(__dirname, '../client/projects.html'))
 })
+app.get('/client/projectDetail' , (req,res)=>{
+    res.sendFile(path.join(__dirname, '../client/projectDetail.html'))
+})
+
 
 app.get('/client/login' , (req,res)=>{
     res.sendFile(path.join(__dirname, '../client/login.html'))

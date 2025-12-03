@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details | Rishi</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+    
+    <!-- Icons (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        .project-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .project-hero-img {
+            width: 50%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--glass-shadow);
+            display: flex;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tech-stack-container {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .case-study-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.8;
+        }
+
+        /* Markdown Styles */
+        .case-study-content h1, 
+        .case-study-content h2, 
+        .case-study-content h3 {
+            color: var(--text-main);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .case-study-content p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .case-study-content ul, 
+        .case-study-content ol {
+            color: var(--text-muted);
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .case-study-content strong {
+            color: var(--primary);
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar glass">
+        <div class="container nav-container">
+            <a href="/" class="logo">Rishi<span class="dot">.</span></a>
+            
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/projects.html" class="active">Projects</a></li>
+                <li><a href="/#services">Services</a></li>
+                <li><a href="/#contact">Contact</a></li>
+                <li><a href="/api/admin" class="btn btn-sm btn-outline">Admin</a></li>
+            </ul>
+
+            <div class="hamburger">
+                <i data-lucide="menu"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <a href="/">Home</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/#services">Services</a>
+        <a href="/#contact">Contact</a>
+        <a href="/login.html">Admin</a>
+    </div>
+
+    <main class="pt-32 pb-20">
+        <div class="container">
+            <div id="project-content">
+                <div class="loading-spinner">Loading project details...</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom text-center">
+                <p>&copy; 2025 Rishi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/mock-backend.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        lucide.createIcons();
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Get ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = urlParams.get('id');
+
+            if (!projectId) {
+                window.location.href = '/projects.html';
+                return;
+            }
+
+            try {
+               const res = await fetch(`/api/projects/${projectId}`);
+
+               if (!res.ok) throw new Error("Project not found");
+
+               const project = await res.json();
+                
+                if (!project) {
+                    document.getElementById('project-content').innerHTML = `
+                        <div class="text-center">
+                            <h1>Project not found</h1>
+                            <a href="/projects.html" class="btn btn-primary" style="margin-top: 1rem">Back to Projects</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Render Project Details
+                const container = document.getElementById('project-content');
+                container.innerHTML = `
+                    <div class="project-header">
+                        <span class="badge">Case Study</span>
+                        <h1 class="text-gradient" style="font-size: 3rem; margin-bottom: 1rem;">${project.title}</h1>
+                        <p class="subtitle" style="max-width: 800px; margin: 0 auto;">${project.description}</p>
+                        
+                        <div class="tech-stack-container">
+                            ${project.techStack.map(tech => `<span class="tech-badge">${tech}</span>`).join('')}
+                        </div>
+                    </div>
+
+                    <img src="${project.imageUrl}" alt="${project.title}" class="project-hero-img">
+
+                    <div class="glass-card case-study-content">
+                        ${marked.parse(project.markdown || 'No case study available yet.')}
+                        
+                        <div class="action-buttons">
+                            <a href="${project.liveLink}" class="btn btn-primary" target="_blank">
+                                Live Demo <i data-lucide="external-link"></i>
+                            </a>
+                            <a href="${project.githubLink}" class="btn btn-outline" target="_blank">
+                                View Code <i data-lucide="github"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                lucide.createIcons();
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById('project-content').innerHTML = '<div class="error">Failed to load project details</div>';
+            }
+        });
+    </script>
+</body>
+</html>

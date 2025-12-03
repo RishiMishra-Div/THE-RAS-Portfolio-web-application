@@ -56,13 +56,16 @@ if (skillsGrid && typeof skills !== 'undefined') {
     `).join('');
 }
 
-// Dynamic Projects Rendering
+// <----------------------------------------- Dynamic Projects Rendering ------------------------------------------>
+
 async function loadProjects(containerId, limit = null) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
     try {
-        let projects = await mockApi.projects.getAll();
+        const res = await fetch("/api/projects");
+        let projects = await res.json();
+        
         if (limit) {
             projects = projects.slice(0, limit);
         }
@@ -79,7 +82,7 @@ async function loadProjects(containerId, limit = null) {
                     </div>
                     <p>${project.description}</p>
                     <div class="project-footer">
-                        <a href="${project.liveLink}" class="btn btn-primary btn-card"><i data-lucide="external-link"></i> Demo</a>
+                        <a href="/projectDetail.html?id=${project._id}" class="btn btn-primary btn-card"><i data-lucide="external-link"></i> Demo</a>
                         <a href="${project.githubLink}" class="btn btn-outline btn-card"><i data-lucide="github"></i> Code</a>
                     </div>
                 </div>
@@ -90,6 +93,7 @@ async function loadProjects(containerId, limit = null) {
         lucide.createIcons();
     } catch (error) {
         container.innerHTML = '<div class="error">Failed to load projects</div>';
+        console.error("Error loading projects:", error);
     }
 }
 
@@ -99,6 +103,9 @@ if (featuredProjects) {
     loadProjects('featured-projects', 3);
 }
 
+
+
+// <--------------------------------------------------Contact Form Submission--------------------------------------- --------->
 
 const form = document.getElementById("contact-form");
 const successBox = document.getElementById("contact-success");
