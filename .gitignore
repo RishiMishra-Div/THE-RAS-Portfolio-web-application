@@ -6,13 +6,4 @@ vite.config.ts.*
 *.tar.gz
 .createAdmin.js
 
-.env
-logs
-logs/*
-logs/*.log
-logs/*.json
-logs/*.txt
-logs/*.gz
-coverage
-*.log
-*.json          
+server/.env
