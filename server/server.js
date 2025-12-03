@@ -5,7 +5,6 @@ const cors = require('cors');
 
 // app setup
 const app = express();
-port = 3000;
 
 
 //  middelewares
@@ -13,7 +12,7 @@ app.use(express.static(path.join(__dirname , '../client')));
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:3000', // or your frontend URL
+  origin: process.env.CLIENT_UR ||'http://localhost:3000', // or your frontend URL
   credentials: true
 }));
 
@@ -59,6 +58,5 @@ app.get('/client/login' , (req,res)=>{
 
 
 // app listener
-app.listen(port, (re,res)=>{
-    console.log(`server running on ${port}`);
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log("Server running on port " + PORT));
