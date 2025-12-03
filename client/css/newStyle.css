@@ -284,34 +284,56 @@ body {
 .section-header p {
     color: var(--text-muted);
     font-size: 1.1rem;
+
 }
 
 /* About */
+#about-container {
+    display: flex;
+    gap: 2rem;
+    padding: 0 2rem;
+} 
+
 .about-grid {
-    display: grid;
+    /* display: grid; */
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
+    margin-top: 5rem;
 }
 
 .about-card {
     padding: 2.5rem;
+    margin-bottom: 2rem;
 }
 
 .about-card h3 {
     font-size: 1.75rem;
     margin-bottom: 1rem;
 }
+.about-card p {
+    color: var(--text-muted);
+    line-height: 1.8;
+}
+.my-name {
+    margin-top: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-align: right;
+}
 
-.about-stats h2 {
+.about-stats h2 {   
     font-size: 2.5rem;
-    margin-bottom: 2rem;
+    margin-left: 2rem;
+    margin-top: 2;
 }
 
 .stats-grid {
     display: flex;
     align-items: center;
     gap: 2rem;
+    margin-left: 2rem;
 }
 
 .stat-item h4 {
@@ -332,11 +354,17 @@ body {
     background: var(--glass-border);
 }
 
+/* .profile-image {
+    height: auto;
+    width: auto;
+} */
+
 /* Skills */
 .skills-grid {
-    display: grid;
+    display: flex;
+    justify-content: center;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1.5rem;
+    gap: 3rem;
 }
 
 .skill-card {
@@ -631,7 +659,7 @@ body {
 
 .footer-links h4, .footer-social h4 {
     margin-bottom: 1.5rem;
-    color: rgb(255, 255, 9);
+    color: #6366F1;
 }
 
 .footer-links {
@@ -761,52 +789,120 @@ body {
     display: block;
 }
 
-/* Mobile Responsive */
+/* message css */
+
+
+/* Messages Tab Wrapper */
+#messages-tab {
+    padding: 2rem;
+}
+
+/* Inbox title row */
+#inbox-text h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+/* Messages list container */
+.messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+/* Scrollbar styling */
+.messages-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.messages-list::-webkit-scrollbar-thumb {
+    background: var(--glass-border);
+    border-radius: 999px;
+}
+
+.messages-list::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* Each message card (uses existing .glass-card) */
+.messages-list .glass-card {
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Hover effect on message card */
+.messages-list .glass-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* Flex between already exists, just make sure align-items is okay here */
+.messages-list .flex-between {
+    align-items: flex-start;
+}
+
+/* ---------- Utility classes used in your HTML ---------- */
+
+/* Spacing utilities */
+.p-6 {
+    padding: 1.5rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.mt-4 {
+    margin-top: 1rem;
+}
+
+/* Text color utilities */
+.text-white {
+    color: #ffffff;
+}
+
+.text-primary {
+    color: var(--primary);
+}
+
+.text-gray {
+    color: var(--text-muted);
+}
+
+/* Text size utilities */
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+}
+
+/* Make message text more readable */
+.messages-list p {
+    line-height: 1.5;
+}
+
+/* Responsive tweaks */
 @media (max-width: 768px) {
-    .hero-content h1 {
-        font-size: 2.5rem;
-    }
-    
-    .about-grid, .services-grid, .testimonials-grid, .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    .nav-links {
-        display: none;
-    }
-    
-    .hamburger {
-        display: block;
-    }
-    
-    .mobile-menu {
-        display: none;
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background: var(--bg-dark);
-        padding: 1rem;
-        border-bottom: 1px solid var(--glass-border);
-        z-index: 999;
-        flex-direction: column;
-    }
-    
-    .mobile-menu a {
-        display: block;
-        padding: 1rem;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
+    #messages-tab {
+        padding: 1.25rem;
     }
 
-    .mobile-menu.open {
-        display: flex;
-    }
-    
-    .cta-group {
-        flex-direction: column;
+    .messages-list .glass-card {
+        padding: 1.25rem;
     }
 }
+
 
 /* css for mesage sent notification */
 

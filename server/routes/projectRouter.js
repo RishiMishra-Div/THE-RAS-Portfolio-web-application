@@ -36,11 +36,11 @@ router.get("/:id", async (req, res) => {
 // UPDATE project
 router.put("/:id", isAdmin, async (req, res) => {
     try {
-        const { title, description, markdown, techStack, imageUrl } = req.body;
+        const { title, description, markdown, techStack, imageUrl, githubLink} = req.body;
 
         const updatedProject = await Project.findByIdAndUpdate(
             req.params.id,
-            { title, description, markdown, techStack, imageUrl },
+            { title, description, markdown, techStack, imageUrl, githubLink },
             { new: true, runValidators: true }
         );
 

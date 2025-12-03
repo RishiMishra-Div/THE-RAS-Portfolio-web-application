@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Rishi</title>
+    <title>Admin Dashboard | THE RAS</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/modal.css">
     <link rel="stylesheet" href="/css/project.css">
@@ -95,11 +95,223 @@
         } 
 
     </style>
+    <style>
+    /* ... tumhari markdown wali CSS yahan tak hai ... */
+
+    /* ========== Inbox / Messages Tab Styling ========== */
+
+    #messages-tab {
+        padding: 1.5rem 0;
+    }
+
+    #inbox-text h3 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--text-main);
+    }
+
+    /* Messages list container */
+    .messages-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        max-height: 480px;
+        overflow-y: auto;
+        padding-right: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    /* Scrollbar */
+    .messages-list::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .messages-list::-webkit-scrollbar-thumb {
+        background: var(--glass-border);
+        border-radius: 999px;
+    }
+
+    .messages-list::-webkit-scrollbar-thumb:hover {
+        background: var(--primary);
+    }
+
+    /* Message card (only in inbox, not everywhere) */
+    #admin-messages .glass-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 0.9rem;
+        transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    #admin-messages .glass-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--primary);
+        background: rgba(255, 255, 255, 0.04);
+    }
+
+    /* Make top row align nicely */
+    #admin-messages .flex-between {
+        align-items: flex-start;
+    }
+
+    /* Paragraph inside message */
+    #admin-messages p {
+        line-height: 1.5;
+    }
+
+    /* ---------- Utility classes from your JS ---------- */
+
+    .p-6 {
+        padding: 1.5rem;
+    }
+
+    .mb-4 {
+        margin-bottom: 1rem;
+    }
+
+    .mb-2 {
+        margin-bottom: 0.5rem;
+    }
+
+    .mt-4 {
+        margin-top: 1rem;
+    }
+
+    .text-white {
+        color: #ffffff;
+    }
+
+    .text-primary {
+        color: var(--primary);
+    }
+
+    .text-gray {
+        color: var(--text-muted);
+    }
+
+    .text-sm {
+        font-size: 0.875rem;
+    }
+
+    .text-xs {
+        font-size: 0.75rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .messages-list {
+            max-height: none;
+        }
+
+        #admin-messages .glass-card {
+            padding: 1.25rem;
+        }
+    }
+
+    /* ========== Admin Dashboard Specific Styles ========== */
+    /* 2-Column Inbox Layout */
+.inbox-wrapper {
+    display: grid;
+    grid-template-columns: 35% 1fr;
+    height: 500px;
+    gap: 1rem;
+}
+
+/* Message list scrollable */
+.messages-list {
+    overflow-y: auto;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: .5rem;
+}
+
+/* Individual message item */
+.message-item {
+    padding: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all .2s;
+    border: 1px solid transparent;
+}
+
+.message-item:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+.message-item.active {
+    background: rgba(255,255,255,0.08);
+    border-color: var(--primary);
+}
+
+/* Text inside message item */
+.message-name {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.message-email {
+    color: var(--primary);
+    font-size: 0.85rem;
+}
+
+.message-short {
+    color: var(--text-muted);
+    font-size: .8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Right Side Full Message View */
+#message-preview {
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    overflow-y: auto;
+    color: var(--text-main);
+}
+
+#message-preview.empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+}
+
+/* Responsive (mobile switches to full page message mode) */
+@media(max-width: 768px) {
+    .inbox-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    #message-preview {
+        margin-top: 1rem;
+    }
+}
+
+/* Improved Message Card UI (CSS Additions) */
+.unread {
+    font-weight: bold;
+    border-left: 3px solid var(--primary);
+}
+
+.badge-count {
+    background: var(--primary);
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    border-radius: 50px;
+    margin-left: 8px;
+}
+
+</style>
+
 </head>
 <body>
     <nav class="navbar glass">
         <div class="container nav-container">
-            <a href="/" class="logo">Rishi<span class="dot">.</span></a>
+            <a href="/" class="logo">THE RAS<span class="dot">.</span></a>
             <div class="flex-center gap-4">
                 <span class="badge">Admin Mode</span>
                 <button id="logout-btn" class="btn btn-sm btn-danger"><i data-lucide="log-out"></i> Logout</button>
@@ -129,13 +341,37 @@
             </div>
 
             <div id="messages-tab" class="tab-content">
-                <div class="flex-between mb-6">
-                    <h3>Inbox</h3>
+                <div class="flex-between mb-6" id="inbox-text">
+                    <h3>Inbox <span id="message-count" class="badge-count"></span></h3>
+                
+                    <div style="display:flex; gap:10px;">
+                        <input type="text" id="searchMessages" placeholder="Search..." 
+                            style="padding:8px 14px;border-radius:8px;border:1px solid var(--glass-border);background:var(--glass-bg);color:white;">
+                        
+                        <select id="sortMessages" 
+                            style="padding:8px 14px;border-radius:8px;border:1px solid var(--glass-border);background:var(--glass-bg);color:white;">
+                            <option value="latest">Latest</option>
+                            <option value="oldest">Oldest</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="messages-list" id="admin-messages">
-                    <!-- Loaded via JS -->
+
+            
+                <div class="inbox-wrapper">
+                 
+                 <!-- Left Inbox List -->
+                 <div class="messages-list" id="admin-messages">
+                     <!-- Loaded via JS -->
+                 </div>
+            
+                 <!-- Right Message Preview -->
+                 <div id="message-preview" class="message-preview empty">
+                     <p>Select a message to read.</p>
+                 </div>
+            
                 </div>
             </div>
+
         </div>
     </main>
 
@@ -187,6 +423,10 @@
                <div class="form-group">
                    <label for="p-image">Image URL</label>
                    <input type="url" id="p-image" placeholder="https://example.com/image.jpg">
+               </div>
+               <div class="form-group">
+                   <label for="p-githublink">GitHub Repo URL</label>
+                   <input type="url" id="p-githublink" placeholder="git@github.com:username/repositoryname.git">
                </div>
             
                <!-- Submit -->
@@ -287,6 +527,7 @@
                 document.getElementById("p-desc").value = project.description;
                 document.getElementById("p-tech").value = project.techStack.join(", ");
                 document.getElementById("p-image").value = project.imageUrl;
+                document.getElementById("p-githublink").value = project.githubLink;
         
                 editorInstance.value(project.markdown || "");
                 document.getElementById("preview").innerHTML = marked.parse(project.markdown || "");
@@ -321,7 +562,8 @@
                 techStack: document.getElementById("p-tech").value.split(",")
                     .map(item => item.trim())
                     .filter(Boolean),
-                imageUrl: document.getElementById("p-image").value || "https://via.placeholder.com/600x400"
+                imageUrl: document.getElementById("p-image").value || "https://via.placeholder.com/600x400",
+                githubLink: document.getElementById("p-githublink").value || ""
             };
         
             try {
@@ -395,24 +637,111 @@
 
 
 
+    //    async function loadMessages() {
+    //         const messages = await fetch("/api/contact").then(res => res.json());
+    //         const container = document.getElementById("admin-messages");
+            
+    //         container.innerHTML = messages.map(m => `
+    //             <div class="message-item" data-message='${JSON.stringify(m).replace(/'/g, "&apos;")}'>
+    //                 <div class="message-name">${m.name}</div>
+    //                 <div class="message-email">${m.email}</div>
+    //                 <div class="message-short">${m.message}</div>
+    //             </div>
+    //         `).join("");
+        
+    //         // Click handler for preview
+    //         document.querySelectorAll(".message-item").forEach(item => {
+    //             item.addEventListener("click", () => {
+                    
+    //                 document.querySelectorAll(".message-item").forEach(i => i.classList.remove("active"));
+    //                 item.classList.add("active");
+        
+    //                 const data = JSON.parse(item.dataset.message);
+    //                 const preview = document.getElementById("message-preview");
+    //                 preview.classList.remove("empty");
+        
+    //                 preview.innerHTML = `
+    //                     <h2>${data.name}</h2>
+    //                     <p class="text-primary mb-2">${data.email}</p>
+    //                     <small class="text-gray">${new Date(data.createdAt).toLocaleString()}</small>
+    //                     <hr style="margin:15px 0; border-color:rgba(255,255,255,0.1)">
+    //                     <p>${data.message}</p>
+    //                 `;
+    //             });
+    //         });
+    //     }
+
+
+         let GLOBAL_MESSAGES = [];
+         let SELECTED_MESSAGE = null;
+
         async function loadMessages() {
-            const messages = await mockApi.messages.getAll();
-            const messagesContainer = document.getElementById('admin-messages');
-            messagesContainer.innerHTML = messages.map(m => `
-                <div class="glass-card p-6 mb-4">
-                    <div class="flex-between mb-2">
-                        <div>
-                            <h4 class="text-white">${m.name}</h4>
-                            <p class="text-primary text-sm">${m.email}</p>
-                        </div>
-                        <span class="text-xs text-gray">${new Date(m.createdAt).toLocaleDateString()}</span>
+        GLOBAL_MESSAGES = await fetch("/api/contact").then(res => res.json());
+            
+                renderMessages();
+            }
+            
+            function renderMessages() {
+                const searchValue = document.getElementById("searchMessages").value.toLowerCase();
+                const sortValue = document.getElementById("sortMessages").value;
+            
+                let filtered = GLOBAL_MESSAGES
+                    .filter(m => m.name.toLowerCase().includes(searchValue) || m.email.includes(searchValue) || m.message.toLowerCase().includes(searchValue));
+            
+                if (sortValue === "latest") filtered.reverse();
+            
+                document.getElementById("message-count").innerText = filtered.length;
+            
+                const container = document.getElementById("admin-messages");
+            
+                container.innerHTML = filtered.map(m => `
+                    <div class="message-item ${m.status === 'unread' ? 'unread' : ''}" 
+                         data-id="${m._id}">
+                        <div class="message-name">${m.name}</div>
+                        <div class="message-email">${m.email}</div>
+                        <div class="message-short">${m.message}</div>
                     </div>
-                    <p class="text-gray mt-4">${m.message}</p>
-                </div>
-            `).join('');
-        }
-
-
+                `).join("");
+            
+                addMessageClickEvents();
+            }
+            
+            function addMessageClickEvents(){
+                document.querySelectorAll(".message-item").forEach(item => {
+                    item.addEventListener("click", () => {
+                        const id = item.dataset.id;
+                        SELECTED_MESSAGE = GLOBAL_MESSAGES.find(m => m._id === id);
+            
+                        item.classList.remove("unread");
+                        SELECTED_MESSAGE.status = "read";
+            
+                        showPreview();
+                    });
+                });
+            }
+            
+            function showPreview(){
+                const preview = document.getElementById("message-preview");
+                const m = SELECTED_MESSAGE;
+            
+                preview.classList.remove("empty");
+            
+                preview.innerHTML = `
+                    <h2>${m.name}</h2>
+                    <p class="text-primary">${m.email}</p>
+                    <small>${new Date(m.createdAt).toLocaleString()}</small>
+                    <hr style="margin:15px 0;">
+                    <p>${m.message}</p>
+                    <br>
+                    <button class="btn btn-primary" onclick="replyMessage('${m.email}')"><i data-lucide="mail"></i> Reply</button>
+                    <button class="btn btn-danger" onclick="deleteMessage('${m._id}')"><i data-lucide="trash"></i> Delete</button>
+                    <button class="btn btn-outline" onclick="markUnread('${m._id}')"><i data-lucide="eye-off"></i> Mark Unread</button>
+                `;
+            }
+            
+            document.getElementById("searchMessages").addEventListener("input", renderMessages);
+            document.getElementById("sortMessages").addEventListener("change", renderMessages);
+            
 
 
     
@@ -433,6 +762,24 @@
             loadProjects();
             loadMessages();
         });
+
+        function replyMessage(email){
+            window.location.href = `mailto:${email}`;
+        }
+        
+        async function deleteMessage(id){
+            if(confirm("Delete message?")){
+                await fetch(`/api/contact/${id}`, { method:"DELETE" });
+                loadMessages();
+            }
+        }
+        
+        function markUnread(id){
+            const msg = GLOBAL_MESSAGES.find(m => m._id === id);
+            msg.status = "unread";
+            renderMessages();
+        }
+        
     </script>
 </body>
 </html>
