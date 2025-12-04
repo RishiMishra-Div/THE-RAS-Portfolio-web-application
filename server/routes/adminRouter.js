@@ -20,7 +20,7 @@ router.get('/isAdmin', isAdmin , (req, res) => {
 });
 
 // get admin page
-router.get("/admin", isAdmin, (req, res) => {
+router.get("/getadmin", isAdmin, (req, res) => {
   res.sendFile(path.join(__dirname, "protected_views", "admin.html"));
 });
 

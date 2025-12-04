@@ -193,7 +193,7 @@ form.addEventListener("submit", async (e) => {
             const data = await res.json();
         
             if (data.success) {
-                window.location.href = `${API_URL}/api/admin/admin`; // protected route
+                window.location.href = `${API_URL}/api/admin/getadmin`; // protected route
             } else {
                 window.location.href = "/login.html";
             }
