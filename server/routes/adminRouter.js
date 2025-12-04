@@ -11,7 +11,7 @@ router.post('/adminLogin', adminLogin);
 router.post('/adminLogout', adminLogout);
 
 // Check if admin is logged in
-router.get('/isAdmin', isAdmin, (req, res) => {
+router.get('/isAdmin', isAdmin , (req, res) => {
   res.json({
     success: true,
     message: `Welcome admin: ${req.admin.email}`
