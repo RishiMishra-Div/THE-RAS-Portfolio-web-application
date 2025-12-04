@@ -1,15 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const path = require('path')
-const {adminLogin} = require('../controllers/authController');
+const {adminLogin, adminLogout } = require('../controllers/authController');
 const {isAdmin} = require('../middlewares/isAdmin')
 
-router.get('/' , isAdmin , (req,res)=>{
-    res.sendFile(path.join(__dirname, '../../client/admin.html'))
-})
 
+// Admin login
 router.post('/adminLogin', adminLogin);
 
+// Admin logout
+router.post('/adminLogout', adminLogout);
+
+// Check if admin is logged in
 router.get('/isAdmin', isAdmin, (req, res) => {
   res.json({
     success: true,

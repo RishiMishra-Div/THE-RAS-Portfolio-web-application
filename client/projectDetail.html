@@ -97,7 +97,7 @@
                 <li><a href="/projects.html" class="active">Projects</a></li>
                 <li><a href="/#services">Services</a></li>
                 <li><a href="/#contact">Contact</a></li>
-                <li><a href="/api/admin" class="btn btn-sm btn-outline">Admin</a></li>
+                <li><a  href="#" id="adminLink" class="btn btn-sm btn-outline">Admin</a></li>
             </ul>
 
             <div class="hamburger">
@@ -112,7 +112,7 @@
         <a href="/projects.html">Projects</a>
         <a href="/#services">Services</a>
         <a href="/#contact">Contact</a>
-        <a href="/login.html">Admin</a>
+        <a href="#" id="adminLink">Admin</a>
     </div>
 
     <main class="pt-32 pb-20">
@@ -131,8 +131,7 @@
             </div>
         </div>
     </footer>
-
-    <script src="/js/mock-backend.js"></script>
+     <script src="/js/config.js"></script>
     <script src="/js/main.js"></script>
     <script>
         lucide.createIcons();
@@ -148,7 +147,7 @@
             }
 
             try {
-               const res = await fetch(`/api/projects/${projectId}`);
+               const res = await fetch(`${API_URL}/api/projects/${projectId}`);
 
                if (!res.ok) throw new Error("Project not found");
 

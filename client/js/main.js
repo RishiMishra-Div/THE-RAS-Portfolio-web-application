@@ -63,7 +63,7 @@ async function loadProjects(containerId, limit = null) {
     if (!container) return;
 
     try {
-        const res = await fetch("/api/projects");
+        const res = await fetch(`${API_URL}/api/projects`);
         let projects = await res.json();
         
         if (limit) {
@@ -133,7 +133,7 @@ form.addEventListener("submit", async (e) => {
     errorBox.classList.add("hidden");
 
     try {
-        const res = await fetch("/api/contact", {
+        const res = await fetch(`${API_URL}/api/contact`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData)
@@ -177,3 +177,29 @@ form.addEventListener("submit", async (e) => {
         }, 1200);
     }
 });
+
+
+
+        // Admin Link Handling
+
+        document.getElementById("adminLink").addEventListener("click", async () => {
+
+            // Call backend to validate authenticated session
+            const res = await fetch(`${API_URL}/api/admin/isAdmin`, {
+                method: "GET",
+                credentials: "include"  // <-- IMPORTANT for cookies
+            });
+        
+            const data = await res.json();
+        
+            if (!data.success) {
+                // if not logged in
+                window.location.href = "/login.html";
+                return;
+            }
+        
+          
+            // if logged in
+            window.location.href = "admin.html";
+        });
+            

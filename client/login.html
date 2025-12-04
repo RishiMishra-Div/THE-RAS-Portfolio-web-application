@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login | THE RAS</title>
-    <link rel="stylesheet" href="/css/newStyle.css">
+    <link rel="stylesheet" href="/css/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -37,9 +37,9 @@
             <a href="/" class="text-sm text-gray">Back to Home</a>
         </div>
     </div>
+    <script src="/js/config.js"></script>
     <script>
         lucide.createIcons();
-        const API_BASE_URL = '/api'
         
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -47,7 +47,7 @@
             const password = document.getElementById('password').value;
             
             try {
-                const response = await fetch(`${API_BASE_URL}/admin/adminLogin`, {
+                const response = await fetch(`${API_URL}/api/admin/adminLogin`, {
                     method: 'POST',
                     headers: {
                     'Content-Type': 'application/json'
@@ -57,7 +57,7 @@
                 });
   
                 if (response.ok) {
-                    window.location.href = '/api/admin';
+                    window.location.href = 'admin.html';
                 }
             } catch (error) {
                 const errorEl = document.getElementById('login-error');

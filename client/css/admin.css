@@ -1,0 +1,290 @@
+.markdown-section {
+            margin-top: 40px;
+            background: rgba(255,255,255,0.05);
+            padding: 25px;
+            border-radius: 16px;
+            backdrop-filter: blur (10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            }
+
+        .markdown-header {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }        
+
+        .markdown-actions {
+            text-align: right;
+            margin-top: 15px;
+        }        
+
+        #preview {
+            margin-top: 20px;
+            padding: 25px;
+            background: #ffffff;
+            border-radius: 12px;
+            min-height: 200px;
+            line-height: 1.6;
+            font-size: 16px;
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.08);
+        }        
+
+        /* Better typography for rendered markdown */
+        #preview h1, #preview h2, #preview h3 {
+            font-weight: 700;
+            margin-top: 20px;
+        }        
+
+        #preview ul {
+            padding-left: 20px;
+        }        
+
+        #preview table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }        
+
+        #preview table, #preview th, #preview td {
+            border: 1px solid #ddd;
+        }        
+
+        #preview th, #preview td {
+            padding: 10px;
+        }        
+
+        /* Button improvements */
+        .btn.save-btn {
+            background: #1E88E5;
+            padding: 10px 18px;
+            border-radius: 6px;
+            transition: 0.2s;
+        }        
+
+        .btn.save-btn:hover {
+            background: #1565C0;
+        }        
+
+        /* Fix SimpleMDE to match UI width */
+        .CodeMirror, #editor {
+            min-height: 300px !important;
+            border-radius: 10px;
+        }        
+
+        .markdown-container {
+            max-width: 800px;
+            margin: auto;
+        } 
+
+    /* ... tumhari markdown wali CSS yahan tak hai ... */
+
+    /* ========== Inbox / Messages Tab Styling ========== */
+
+    #messages-tab {
+        padding: 1.5rem 0;
+    }
+
+    #inbox-text h3 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--text-main);
+    }
+
+    /* Messages list container */
+    .messages-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        max-height: 480px;
+        overflow-y: auto;
+        padding-right: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    /* Scrollbar */
+    .messages-list::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .messages-list::-webkit-scrollbar-thumb {
+        background: var(--glass-border);
+        border-radius: 999px;
+    }
+
+    .messages-list::-webkit-scrollbar-thumb:hover {
+        background: var(--primary);
+    }
+
+    /* Message card (only in inbox, not everywhere) */
+    #admin-messages .glass-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 0.9rem;
+        transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    #admin-messages .glass-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--primary);
+        background: rgba(255, 255, 255, 0.04);
+    }
+
+    /* Make top row align nicely */
+    #admin-messages .flex-between {
+        align-items: flex-start;
+    }
+
+    /* Paragraph inside message */
+    #admin-messages p {
+        line-height: 1.5;
+    }
+
+    /* ---------- Utility classes from your JS ---------- */
+
+    .p-6 {
+        padding: 1.5rem;
+    }
+
+    .mb-4 {
+        margin-bottom: 1rem;
+    }
+
+    .mb-2 {
+        margin-bottom: 0.5rem;
+    }
+
+    .mt-4 {
+        margin-top: 1rem;
+    }
+
+    .text-white {
+        color: #ffffff;
+    }
+
+    .text-primary {
+        color: var(--primary);
+    }
+
+    .text-gray {
+        color: var(--text-muted);
+    }
+
+    .text-sm {
+        font-size: 0.875rem;
+    }
+
+    .text-xs {
+        font-size: 0.75rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .messages-list {
+            max-height: none;
+        }
+
+        #admin-messages .glass-card {
+            padding: 1.25rem;
+        }
+    }
+
+    /* ========== Admin Dashboard Specific Styles ========== */
+    /* 2-Column Inbox Layout */
+.inbox-wrapper {
+    display: grid;
+    grid-template-columns: 35% 1fr;
+    height: 500px;
+    gap: 1rem;
+}
+
+/* Message list scrollable */
+.messages-list {
+    overflow-y: auto;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: .5rem;
+}
+
+/* Individual message item */
+.message-item {
+    padding: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all .2s;
+    border: 1px solid transparent;
+}
+
+.message-item:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+.message-item.active {
+    background: rgba(255,255,255,0.08);
+    border-color: var(--primary);
+}
+
+/* Text inside message item */
+.message-name {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.message-email {
+    color: var(--primary);
+    font-size: 0.85rem;
+}
+
+.message-short {
+    color: var(--text-muted);
+    font-size: .8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Right Side Full Message View */
+#message-preview {
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    overflow-y: auto;
+    color: var(--text-main);
+}
+
+#message-preview.empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+}
+
+/* Responsive (mobile switches to full page message mode) */
+@media(max-width: 768px) {
+    .inbox-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    #message-preview {
+        margin-top: 1rem;
+    }
+}
+
+/* Improved Message Card UI (CSS Additions) */
+.unread {
+    font-weight: bold;
+    border-left: 3px solid var(--primary);
+}
+
+.badge-count {
+    background: var(--primary);
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    border-radius: 50px;
+    margin-left: 8px;
+}

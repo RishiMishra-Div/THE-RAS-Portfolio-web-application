@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- CSS -->
-    <link rel="stylesheet" href="/css/newStyle.css">
+    <link rel="stylesheet" href="/css/style.css">
     
     <!-- Icons (Lucide) -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -27,10 +27,10 @@
             
             <ul class="nav-links">
                 <li><a href="/" class="active">Home</a></li>
-                <li><a href="/client/projects">Projects</a></li>
+                <li><a href="projects.html">Projects</a></li>
                 <li><a href="/#services">Services</a></li>
                 <li><a href="/#contact">Contact</a></li>
-                <li><a href="/api/admin" class="btn btn-sm btn-outline">Admin</a></li>
+                <li><a href="#" id="adminLink" class="btn btn-sm btn-outline">Admin</a></li>
             </ul>
 
             <div class="hamburger">
@@ -42,10 +42,10 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu">
         <a href="/">Home</a>
-        <a href="/client/projects">Projects</a>
+        <a href="projects.html">Projects</a>
         <a href="/#services">Services</a>
         <a href="/#contact">Contact</a>
-        <a href="/client/login">Admin</a>
+        <a href="#" id="adminLink">Admin</a>
     </div>
 
     <!-- Hero Section -->
@@ -59,7 +59,7 @@
             <p class="subtitle">I'm Rishi Mishra, a B.Tech student from India. I'm passionate about learning new technologies and building real-world web applications using my passion</p>
             
             <div class="cta-group">
-                <a href="/client/projects" class="btn btn-primary">View Projects <i data-lucide="arrow-right"></i></a>
+                <a href="projects.html" class="btn btn-primary">View Projects <i data-lucide="arrow-right"></i></a>
                 <a href="#contact" class="btn btn-outline">Contact Me <i data-lucide="mail"></i></a>
             </div>
         </div>
@@ -120,7 +120,7 @@
                     <h2>Featured Projects</h2>
                     <p>Some of the projects I've built during my learning journey.</p>
                 </div>
-                <a href="/client/projects" class="link-arrow">View All <i data-lucide="arrow-right"></i></a>
+                <a href="projects.html" class="link-arrow">View All <i data-lucide="arrow-right"></i></a>
             </div>
             
             <div class="projects-grid" id="featured-projects">
@@ -188,7 +188,7 @@
                     <h2>Let's work together</h2>
                     <p style="margin-top: 1rem; color: var(--text-gray);">Feel free to reach out for collaborations or just a friendly hello!</p>
                 </div>
-                <form id="contact-form" class="contact-form" method="post" action="/api/contact">
+                <form id="contact-form" class="contact-form">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" placeholder="Your Name" required>
@@ -221,7 +221,7 @@
                 <div class="footer-links" style="color: whitesmoke;">
                     <h4>Quick Links</h4>
                     <a href="/">Home</a>
-                    <a href="/client/projects">Projects</a>
+                    <a href="projects.html">Projects</a>
                     <a href="/#services">Services</a>
                     <a href="/#contact">Contact</a>
                 </div>
@@ -239,11 +239,13 @@
             </div>
         </div>
     </footer>
-
-    <script src="./js/mock-backend.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="/js/config.js"></script>
+    <script src="/js/mock-backend.js"></script>
+    <script src="/js/main.js"></script>
     <script>
         lucide.createIcons();
+        
+
     </script>
 </body>
 </html>
