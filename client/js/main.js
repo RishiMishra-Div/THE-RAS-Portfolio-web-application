@@ -182,25 +182,19 @@ form.addEventListener("submit", async (e) => {
 
         // Admin Link Handling
 
-        document.getElementById("adminLink").addEventListener("click", async () => {
-
-            // Call backend to validate authenticated session
+        document.getElementById("adminLink").addEventListener("click", async (e) => {
+            e.preventDefault();
+        
             const res = await fetch(`${API_URL}/api/admin/isAdmin`, {
-                method: "GET",
-                credentials: "include"  // <-- IMPORTANT for cookies
+                credentials: "include"
             });
         
             const data = await res.json();
-            console.log(data);
         
-            if (!data.success) {
-                // if not logged in
+            if (data.success) {
+                window.location.href = "${API_URL}/api/admin/admin"; // protected route
+            } else {
                 window.location.href = "/login.html";
-                return;
             }
-        
-          
-            // if logged in
-            window.location.href = "admin.html";
         });
-            
+        

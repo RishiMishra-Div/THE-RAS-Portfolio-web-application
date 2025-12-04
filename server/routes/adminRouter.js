@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {adminLogin, adminLogout } = require('../controllers/authController');
 const {isAdmin} = require('../middlewares/isAdmin')
+const path = require('path');
 
 
 // Admin login
@@ -18,5 +19,9 @@ router.get('/isAdmin', isAdmin , (req, res) => {
   });
 });
 
+// get admin page
+router.get("/admin", isAdmin, (req, res) => {
+  res.sendFile(path.join(__dirname, "protected_views", "admin.html"));
+});
 
 module.exports = router;
