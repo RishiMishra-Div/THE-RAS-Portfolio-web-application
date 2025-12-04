@@ -184,7 +184,8 @@ form.addEventListener("submit", async (e) => {
 
         document.getElementById("adminLink").addEventListener("click", async (e) => {
             e.preventDefault();
-        
+            document.getElementById("adminLink").innerText = "Checking...";
+
             const res = await fetch(`${API_URL}/api/admin/isAdmin`, {
                 credentials: "include"
             });
@@ -192,7 +193,7 @@ form.addEventListener("submit", async (e) => {
             const data = await res.json();
         
             if (data.success) {
-                window.location.href = "${API_URL}/api/admin/admin"; // protected route
+                window.location.href = `${API_URL}/api/admin/admin`; // protected route
             } else {
                 window.location.href = "/login.html";
             }
