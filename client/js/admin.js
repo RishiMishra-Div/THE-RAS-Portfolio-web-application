@@ -177,10 +177,15 @@
          let SELECTED_MESSAGE = null;
 
         async function loadMessages() {
-        GLOBAL_MESSAGES = await fetch(`${API_URL}/api/contact`).then(res => res.json());
-            
-                renderMessages();
+            try {
+              const res = await fetch(`${API_URL}/api/contact`);
+              GLOBAL_MESSAGES = await res.json();
+              console.log(GLOBAL_MESSAGES);
+              renderMessages();
+            } catch (err) {
+              console.error("Failed to load messages:", err);
             }
+        }    
             
             function renderMessages() {
                 const searchValue = document.getElementById("searchMessages").value.toLowerCase();

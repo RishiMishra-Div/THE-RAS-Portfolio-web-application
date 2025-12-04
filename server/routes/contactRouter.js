@@ -9,14 +9,21 @@ const { isAdmin } = require("../middlewares/isAdmin");
 router.post("/", submitMessage);
 
 // GET all contact messages
-router.get("/", isAdmin , async (req, res) => {
-   try {
-           const message = await contact.find().sort({ createdAt: -1 });
-           res.json(message);
-       } catch (err) {
-           res.status(500).json({ error: err.message });
-       }
+router.get("/", isAdmin, async (req, res) => {
+  try {
+    const messages = await contact.find().sort({ createdAt: -1 });
+    
+    res.json({
+      success: true,
+      count: messages.length,
+      data: messages,
+    });
+
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
 });
+
 
 // delete a contact message
 router.delete("/:id", isAdmin , async (req, res) => {
