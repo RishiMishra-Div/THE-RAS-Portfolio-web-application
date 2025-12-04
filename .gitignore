@@ -7,3 +7,4 @@ vite.config.ts.*
 .createAdmin.js
 
 server/.env
+server/node_modules/
