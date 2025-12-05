@@ -73,6 +73,13 @@ app.get("/getadmin", isAdmin, (req, res) => {
   res.sendFile(path.join(__dirname, "./protected_views/admin.html"));
 });
 
+// ping route for uptime monitoring
+app.get("/api/ping", (req, res) => {
+  console.log("Ping received at", new Date().toLocaleString());
+  res.status(200).send("pong");
+});
+
+
 // app listener
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Server running on port " + PORT));
