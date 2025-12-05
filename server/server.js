@@ -7,24 +7,46 @@ const cors = require('cors');
 const app = express();
 
 
-//  middelewares
-app.use(cookieParser());
-app.use(express.json());
-app.use(cors({
-  origin: process.env.CLIENT_URL , // or your frontend URL
-  credentials: true
-}));
-
-
-// call db
-const db = require('./config/mongodbConnection');
-
-
 
 // require routes
 const adminRouter = require('./routes/adminRouter');
 const contactRouter = require('./routes/contactRouter')
 const projectRouter = require("./routes/projectRouter");
+
+
+
+//  middelewares
+app.use(cookieParser());
+app.use(express.json());
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  (process.env.CLIENT_URL || "").replace(/\/+$/, "")
+];
+
+app.use(cors({
+  origin: function(origin, callback) {
+    // allow requests with no origin (mobile apps, Postman)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error("Not allowed by CORS"));
+  },
+  credentials: true
+}));
+
+
+
+// Serve static frontend assets
+// Serve CSS folder
+app.use("/css", express.static(path.join(__dirname, "../client/css")));
+// Serve JS folder
+app.use("/js", express.static(path.join(__dirname, "../client/js")));
+
+
+// call db
+const db = require('./config/mongodbConnection');
 
 
 
@@ -39,5 +61,5 @@ app.get('/', (req, res) => {
 });
 
 // app listener
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Server running on port " + PORT));
