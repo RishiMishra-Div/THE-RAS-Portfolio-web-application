@@ -22,16 +22,18 @@ app.use(express.json());
 
 const allowedOrigins = [
   "http://localhost:3000",
-  (process.env.CLIENT_URL || "").replace(/\/+$/, "")
-];
+  process.env.CLIENT_URL?.replace(/\/+$/, ""),
+  process.env.RENDER_EXTERNAL_URL?.replace(/\/+$/, ""), // <- Render backend URL
+].filter(Boolean); // removes empty values
+
 
 app.use(cors({
   origin: function(origin, callback) {
-    // allow requests with no origin (mobile apps, Postman)
-    if (!origin) return callback(null, true);
+    if (!origin) return callback(null, true); // allow server-to-server or curl
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
+    console.log("❌ BLOCKED ORIGIN:", origin); // <--- helpful debug
     return callback(new Error("Not allowed by CORS"));
   },
   credentials: true
