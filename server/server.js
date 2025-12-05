@@ -45,6 +45,10 @@ app.use("/css", express.static(path.join(__dirname, "../client/css")));
 app.use("/js", express.static(path.join(__dirname, "../client/js")));
 
 
+console.log("__dirname:", __dirname);
+console.log("Resolved CSS path:", path.join(__dirname, "../client/css"));
+console.log("Resolved JS path:", path.join(__dirname, "../client/js"));
+
 // call db
 const db = require('./config/mongodbConnection');
 
@@ -58,6 +62,12 @@ app.use('/api/projects', projectRouter);
 
 app.get('/', (req, res) => {
   res.send('server is running');
+});
+
+
+// get admin page
+app.get("/getadmin", isAdmin, (req, res) => {
+  res.sendFile(path.join(__dirname, "./protected_views/admin.html"));
 });
 
 // app listener

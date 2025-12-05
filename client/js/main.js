@@ -180,22 +180,30 @@ form.addEventListener("submit", async (e) => {
 
 
 
-        // Admin Link Handling
+// Admin Link Handling (Deployed Version)
 
-        document.getElementById("adminLink").addEventListener("click", async (e) => {
-            e.preventDefault();
-            document.getElementById("adminLink").innerText = "Checking...";
+  document.getElementById("adminLink").addEventListener("click", async () => {
 
-            const res = await fetch(`${API_URL}/api/admin/isAdmin`, {
-                credentials: "include"
-            });
-        
-            const data = await res.json();
-        
-            if (data.success) {
-                window.location.href = `${API_URL}/api/admin/getadmin`; // protected route
-            } else {
-                window.location.href = "/login.html";
-            }
-        });
+    document.getElementById("adminLink").innerText = "Checking...";
+
+    try {
+      const res = await fetch(`${API_URL}/api/admin/isAdmin`, {
+        credentials: "include"
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        // User is verified -> Go to protected admin panel
+        window.location.href = `${API_URL}/getadmin`;
+      } else {
+        // Not logged in -> Go to login page stored in client folder
+        window.location.href = "/login.html";
+      }
+
+    } catch (err) {
+      console.error(err);
+      window.location.href = "/login.html"; // fallback
+    }
+  });
         

@@ -19,9 +19,4 @@ router.get('/isAdmin', isAdmin , (req, res) => {
   });
 });
 
-// get admin page
-router.get("/getadmin", isAdmin, (req, res) => {
-  res.sendFile(path.join(__dirname, "../protected_views/admin.html"));
-});
-
 module.exports = router;
