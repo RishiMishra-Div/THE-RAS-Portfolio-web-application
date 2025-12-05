@@ -12,6 +12,7 @@ const app = express();
 const adminRouter = require('./routes/adminRouter');
 const contactRouter = require('./routes/contactRouter')
 const projectRouter = require("./routes/projectRouter");
+const { isAdmin } = require('./middlewares/isAdmin');
 
 
 
