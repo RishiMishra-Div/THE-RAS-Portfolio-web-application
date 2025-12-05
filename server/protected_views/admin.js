@@ -1,5 +1,9 @@
-
-        // logout
+// Admin Panel JS
+const API_URL = "https://the-ras-portfolio.onrender.com";; // Set your API URL if needed
+       
+       
+       
+       // logout
         document.getElementById('logout-btn').addEventListener('click', () => {
             const res = fetch(`${API_URL}/api/admin/adminLogout`, {
                 method: 'POST',
