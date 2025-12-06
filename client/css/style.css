@@ -166,10 +166,11 @@ body {
     font-size: 1.5rem;
     font-weight: 800;
     color:#6366F1;
+    margin-left: 3rem;
 }
 
 .logo .dot {
-    color: yellow ;
+    color: rgb(31, 31, 220) ;
 }
 
 .nav-links {
@@ -177,6 +178,7 @@ body {
     gap: 2rem;
     list-style: none;
     align-items: center;
+    margin-right: 5rem;
 }
 
 .nav-links a {
@@ -503,6 +505,8 @@ body {
 
 /* Services */
 .services-grid {
+    margin-left:1rem ;
+    margin-right: 1rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
@@ -538,6 +542,8 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .testimonial-card {
