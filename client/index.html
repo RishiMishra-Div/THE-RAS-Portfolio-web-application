@@ -14,10 +14,155 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- CSS -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     
     <!-- Icons (Lucide) -->
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+   :root {
+  --accent: #4e59f0;
+  --text: #e6e6e6;
+  --subtext: #b5b5b5;
+  --bg-card: rgba(255,255,255,0.05);
+  --border: rgba(255,255,255,0.1);
+}
+
+/* Section Styling */
+#about {
+  padding: 70px 20px;
+  background: #0d0d0d;
+  color: var(--text);
+}
+
+/* Layout */
+.about-flex {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+/* Text Card */
+.about-content {
+  flex: 1 1 480px;
+  padding: 30px;
+  border-radius: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+
+/* Image */
+.about-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5rem; /* space between image and quote */
+}
+
+
+.about-image img {
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  border-radius: 16px;
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  box-shadow: 0 0 20px rgba(77, 67, 218, 0.3);
+}
+.about-image .quote {
+  margin-top: 18px;
+  text-align: center;
+  color: var(--subtext);
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+
+/* Typography */
+h2 {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.intro span, strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+p {
+  line-height: 1.8;
+  color: var(--subtext);
+}
+
+/* Values Block */
+.values {
+  margin: 20px 0;
+  padding: 15px;
+  border-left: 4px solid var(--accent);
+  background: rgba(124, 58, 237, 0.08);
+  border-radius: 10px;
+}
+
+.values ul {
+  padding-left: 20px;
+}
+
+/* Stats */
+.about-stats {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  margin-top: 20px;
+}
+
+.stat-item h4 {
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-flex {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-content {
+    text-align: left;
+  }
+
+  .stats-grid {
+    flex-direction: column;
+  }
+}
+
+
+.quote {
+  margin-top: 18px;
+  text-align: center;
+  color: var(--subtext);
+  font-style: italic;
+  font-size: 1.5rem;
+}
+
+.quote span {
+  display: block;
+  margin-top: 6px;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+
+
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -56,8 +201,11 @@
         <div class="container hero-content">
             <span class="badge">Aspiring Full Stack Developer</span>
             <h1>Building Digital <br><span class="text-gradient">Solutions</span> That Work</h1>
-            <p class="subtitle">I'm Rishi Mishra, The RAS is a digital development service focused on delivering functional, scalable, and future-proof solutions.</p>
-            <p  class = "subtitle">We build products that work — not just products that look good.</p>
+
+            <br>
+            <p class="subtitle">The RAS is a digital development service focused on delivering functional</p>
+            <p  class="subtitle" > scalable, and future-proof solutions.</p>
+            <p class="subtitle">We build products that work — not just products that look good.</p>
             
             <div class="cta-group">
                 <a href="projects.html" class="btn btn-primary">View Projects <i data-lucide="arrow-right"></i></a>
@@ -66,14 +214,57 @@
         </div>
     </header>
 
-    <!-- About Section -->
+    
+</section>
+<!-- 
+
+    About Section --
     <section id="about" class="section">
         <div class="container" id="about-container">
             <div class="about-grid">
                 <div class="about-card glass-card">
+                     <h2>About Me</h2>
+  <p class="intro">
+    I’m <span>Rishi Mishra</span> — the founder of <span>The RAS</span>.
+  </p>
+
+  <p>
+    From experimenting with simple HTML pages to building full-stack applications
+    using Node.js, Express, and MongoDB — my journey has been driven by curiosity,
+    persistence, and a passion for creating with purpose.
+  </p>
+
+  <p>
+    Over time, my focus evolved from designing interfaces to engineering systems
+    that are functional, scalable, and future-ready.
+  </p>
+
+  <div class="values">
+    <h3>My Core Values</h3>
+    <ul>
+      <li>Clean, maintainable code</li>
+      <li>Performance and reliability</li>
+      <li>Real solutions — not temporary fixes</li>
+    </ul>
+  </div>
+
+  <p>
+    Every project is an opportunity to solve meaningful problems — whether it's a
+    fast modern website, a full-stack web app, or a custom system built for business needs.
+  </p>
+
+  <p>
+    This is just the beginning — The RAS will grow into a multi-disciplinary digital
+    solutions agency, expanding into new technologies and collaborations.
+  </p>
+
+  <p class="closing">
+    For now, the mission is simple:<br>
+    <strong>Build digital solutions that work — and keep working.</strong>
+   </p>
                     <h3>About Me</h3>
-                    <p>I am a second-semester B.Tech Student of Sandip university based in Nashik, India. I have a strong interest in web development and I am constantly learning and building new things.</p>
-                    <p>My journey started with simple HTML pages, and now I am building full-stack applications using Node.js, Express, and MongoDB. I love solving problems and writing clean code.</p>
+                    <p>I’m Rishi Mishra — Founder and Developer of The RAS.I am student of Sandip university based in Nashik, India. I have a strong interest in web development and I am constantly learning and building new things.</p>
+                    <p>I started with basic HTML pages, driven by curiosity. Now I build functional and scalable full-stack applications using Node.js, Express, and MongoDB — always with clean, efficient code and a problem-solving mindset.</p>
                     <h3 class ="my-name">~ Rishi Mishra</h3>
                 </div>
                 <div class="about-stats">
@@ -82,7 +273,7 @@
                         <div class="stat-item">
                             <h4>10+</h4>
                             <p>Repositories</p>
-                        </div>
+                        </div> 
                         <div class="stat-separator"></div>
                         <div class="stat-item">
                             <h4>2nd</h4>
@@ -98,7 +289,92 @@
             </div>
             <div class="profile-image"><img src="./images/document photo.png" alt="profile image"></div>
         </div>
-    </section>
+    </section> -->
+    <!-- About Section -->
+<section id="about" class="section">
+  <div class="container about-container">
+    
+    <div class="about-flex">
+      
+      <!-- Text Section -->
+      <div class="about-content glass-card">
+        
+        <h2>About Me</h2>
+
+        <p class="intro">
+          I’m <span>Rishi Mishra</span> — the founder of <span>The RAS</span>.
+        </p>
+
+        <p>
+          From experimenting with simple HTML pages to building full-stack applications
+          using Node.js, Express, and MongoDB — my journey has been driven by curiosity,
+          persistence, and a passion for creating with purpose.
+        </p>
+
+        <p>
+          Over time, my focus evolved from designing interfaces to engineering systems
+          that are functional, scalable, and future-ready.
+        </p>
+
+        <div class="values">
+          <h3>My Core Values</h3>
+          <ul>
+            <li>Clean, maintainable code</li>
+            <li>Performance and reliability</li>
+            <li>Real solutions — not temporary fixes</li>
+          </ul>
+        </div>
+
+        <p>
+          Every project is an opportunity to solve meaningful problems — whether it's a fast,
+          modern website, a full-stack web app, or a custom digital system tailored for business needs.
+        </p>
+
+        <p>
+          This is just the beginning — The RAS will grow into a multi-disciplinary digital
+          solutions agency, expanding into new technologies and collaborations.
+        </p>
+
+        <p class="closing">
+          For now, the mission is simple:<br>
+          <strong>Build digital solutions that work — and keep working.</strong>
+        </p>
+      </div>
+
+      <!-- Image -->
+      <div class="about-image">
+        <img src="./images/document photo.png" alt="Rishi Mishra">
+        <div class="quote">
+           <p>"Build with purpose."</p>
+           <span>~ Rishi Mishra</span>
+        </div>
+      </div>
+    
+
+    </div>
+
+    <!-- Stats -->
+    <div class="about-stats">
+      <h2>Learning by <span class="text-gradient">Building</span> and <span class="text-gradient">Doing</span></h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <h4>10+</h4>
+          <p>Repositories</p>
+        </div> 
+        <div class="stat-item">
+          <h4>2+</h4>
+          <p>year learning</p>
+        </div>
+        <div class="stat-item">
+          <h4>100%</h4>
+          <p>Dedication</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
     <!-- Skills Section -->
     <section id="skills" class="section bg-darker">
