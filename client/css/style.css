@@ -46,7 +46,9 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Utilities */
+
+
+/* ===================================================== Utilities ======================================================== */
 .bg-darker {
     background-color: var(--bg-alt);
 }
@@ -71,7 +73,9 @@ body {
     transform: translateY(-2px);
 }
 
-/* Theme Toggle Button */
+
+
+/* ===================================================== Theme Toggle Button ======================================================== */
 .theme-toggle {
     background: none;
     border: 1px solid var(--glass-border);
@@ -143,7 +147,9 @@ body {
     background: rgba(239, 68, 68, 0.3);
 }
 
-/* Navbar */
+
+
+/* ===================================================== Navbar ======================================================== */
 .navbar {
     position: fixed;
     top: 0;
@@ -166,7 +172,6 @@ body {
     font-size: 1.5rem;
     font-weight: 800;
     color:#6366F1;
-    margin-left: 3rem;
 }
 
 .logo .dot {
@@ -177,8 +182,7 @@ body {
     display: flex;
     gap: 2rem;
     list-style: none;
-    /* align-items: center; */
-    margin-right: 5rem;
+    align-items: center;
 }
 
 .nav-links a {
@@ -195,7 +199,9 @@ body {
     cursor: pointer;
 }
 
-/* Hero */
+
+
+/* ===================================================== Hero ======================================================== */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -235,7 +241,7 @@ body {
 
 .hero-content h1 {
     font-size: 4rem;
-    margin-bottom: 1.rem;
+    margin-bottom: 1rem;
     letter-spacing: -0.02em;
 }
 
@@ -243,7 +249,7 @@ body {
     font-size: 1.25rem;
     color: var(--text-muted);
     max-width: 700px;
-    margin: 0 auto rem;
+    margin: 0 auto;
 }
 
 .hero-content .subtitle1 {
@@ -271,7 +277,9 @@ body {
     margin-top: 2.5rem;
 }
 
-/* Sections */
+
+
+/* ===================================================== Sections ======================================================== */
 .section {
     padding: var(--section-spacing) 0;
 }
@@ -296,79 +304,155 @@ body {
 
 }
 
-/* About */
-#about-container {
-    display: flex;
-    gap: 2rem;
-    padding: 0 2rem;
-} 
 
-.about-grid {
-    /* display: grid; */
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    margin-top: 5rem;
-}
 
-.about-card {
-    padding: 2.5rem;
-    margin-bottom: 2rem;
-}
+/* ================================== about ===================================================================== */
 
-.about-card h3 {
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
-}
-.about-card p {
-    color: var(--text-muted);
-    line-height: 1.8;
-}
-.my-name {
-    margin-top: 1.5rem;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--primary);
-    text-align: right;
-}
 
-.about-stats h2 {   
-    font-size: 2.5rem;
-    margin-left: 2rem;
-    margin-top: 2;
-}
+         :root {
+        --accent: #4e59f0;
+        --text: #e6e6e6;
+        --subtext: #b5b5b5;
+        --bg-card: rgba(255,255,255,0.05);
+        --border: rgba(255,255,255,0.1);
+      }
+      
+      /* Section Styling */
+      #about {
+        padding: 70px 20px;
+        background-color: var(--bg-body);
+        color: var(--text);
+      }
+      
+      /* Layout */
+      .about-flex {
+        display: flex;
+        align-items: flex-start;
+        
+        gap: 80px;
+        flex-wrap: nowrap;
+      }
+      
+      /* Text Card */
+      .about-content {
+        flex: 1 1 70%;
+        min-width: 0;
+        padding: 30px;
+        border-radius: 16px;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        backdrop-filter: blur(12px);
+      }
+      
+      
+      /* Image */
+      .about-image {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5rem; /* space between image and quote */
+      }
+      
+      
+      .about-image img {
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        border-radius: 16px;
+        mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+        box-shadow: 0 0 20px rgba(77, 67, 218, 0.3);
+      }
+      
+      .about-image .quote {
+        margin-top: 18px;
+        text-align: center;
+        color: var(--subtext);
+        font-style: italic;
+        font-size: 0.95rem;
+      }
+      
+      
+      /* Typography */
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 12px;
+      }
+      
+      .intro span, strong {
+        color: var(--accent);
+        font-weight: 600;
+      }
+      
+      p {
+        line-height: 1.8;
+        color: var(--subtext);
+      }
+      
+      /* Values Block */
+      .values {
+        margin: 20px 0;
+        padding: 15px;
+        border-left: 4px solid var(--accent);
+        background: rgba(124, 58, 237, 0.08);
+        border-radius: 10px;
+      }
+      
+      .values ul {
+        padding-left: 20px;
+      }
+      
+      /* Stats */
+      .about-stats {
+        text-align: center;
+        margin-top: 50px;
+      }
+      
+      .stats-grid {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        margin-top: 20px;
+      }
+      
+      .stat-item h4 {
+        font-size: 2rem;
+        color: var(--accent);
+        margin-bottom: 5px;
+      }
+      
+      /* Responsive */
+      @media (max-width: 768px) {
+        .about-flex {
+          flex-direction: column;
+          text-align: center;
+        }
+      
+        .about-content {
+          text-align: left;
+        }
+      
+        
+      }
+      
+      
+      .quote {
+        margin-top: 18px;
+        text-align: center;
+        color: var(--subtext);
+        font-style: italic;
+        font-size: 1.5rem;
+      }
+      
+      .quote span {
+        display: block;
+        margin-top: 6px;
+        color: var(--accent);
+        font-weight: 800;
+      }
+    
 
-.stats-grid {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    margin-left: 2rem;
-}
-
-.stat-item h4 {
-    font-size: 2.5rem;
-    color: var(--text-main);
-}
-
-.stat-item p {
-    color: var(--text-muted);
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.stat-separator {
-    width: 1px;
-    height: 50px;
-    background: var(--glass-border);
-}
-
-/* .profile-image {
-    height: auto;
-    width: auto;
-} */
-
-/* Skills */
+/* ===================================================== Skills ======================================================== */
 .skills-grid {
     display: flex;
     justify-content: center;
@@ -401,13 +485,13 @@ body {
     color: var(--primary);
 }
 
-/* Projects */
+
+
+/* ===================================================== Projects ======================================================== */
 .section-header-row {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-left: 1rem;
-    margin-right: 2rem;
     margin-bottom: 3rem;
 }
 
@@ -422,9 +506,8 @@ body {
 .projects-grid {
     margin-top: 3rem;
     margin-bottom: 3rem;
-    margin-left: 1rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 2rem;
 }
 
@@ -503,10 +586,10 @@ body {
     font-size: 0.875rem;
 }
 
-/* Services */
+
+
+/* ===================================================== Services ======================================================== */
 .services-grid {
-    margin-left:1rem ;
-    margin-right: 1rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
@@ -537,13 +620,13 @@ body {
     color: var(--text-muted);
 }
 
-/* Testimonials */
+
+
+/* ===================================================== Testimonials ======================================================== */
 .testimonials-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
 }
 
 .testimonial-card {
@@ -582,7 +665,9 @@ body {
 .gradient-1 { background: linear-gradient(135deg, #f6d365, #fda085); }
 .gradient-2 { background: linear-gradient(135deg, #84fab0, #8fd3f4); }
 
-/* Contact */
+
+
+/* =====================================================  Contact  ====================================================== */
 .contact-wrapper {
     max-width: 600px;
     margin: 0 auto;
@@ -647,7 +732,9 @@ body {
     resize: vertical;
 }
 
-/* Footer */
+
+
+/* ============================================ Footer ============================================================ */
 .footer {
     border-top: 1px solid rgba(255,255,255,0.05);
     padding: 4rem 0 2rem;
@@ -709,157 +796,16 @@ body {
     font-size: 0.875rem;
 }
 
-/* Admin/Login Specifics */
-.flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.login-card {
-    width: 100%;
-    max-width: 400px;
-    padding: 2.5rem;
-    z-index: 10;
-}
-
-.icon-circle {
-    width: 60px;
-    height: 60px;
-    background: rgba(99, 102, 241, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-    color: var(--primary);
-}
-
-.error-message {
-    color: #ef4444;
-    font-size: 0.875rem;
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-.hidden {
-    display: none;
-}
-
-.flex-between {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.btn-icon {
-    background: transparent;
-    border: none;
-    color: var(--text-gray);
-    cursor: pointer;
-    padding: 0.5rem;
-    transition: color 0.2s;
-}
-
-.btn-icon:hover {
-    color: white;
-}
-
-.btn-icon.text-danger:hover {
-    color: #ef4444;
-}
-
-.tabs {
-    display: flex;
-    gap: 1rem;
-    border-bottom: 1px solid var(--glass-border);
-    margin-bottom: 2rem;
-}
-
-.tab-btn {
-    background: none;
-    border: none;
-    padding: 1rem 1.5rem;
-    color: var(--text-gray);
-    cursor: pointer;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    border-bottom: 2px solid transparent;
-}
-
-.tab-btn.active {
-    color: var(--primary);
-    border-bottom-color: var(--primary);
-}
-
-.tab-content {
-    display: none;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-/* message css */
 
 
-/* Messages Tab Wrapper */
-#messages-tab {
-    padding: 2rem;
-}
+/* this is from where i copied adminLogin.css */
 
-/* Inbox title row */
-#inbox-text h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--text-main);
-}
-
-/* Messages list container */
-.messages-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-height: 500px;
-    overflow-y: auto;
-    padding-right: 0.5rem;
-}
-
-/* Scrollbar styling */
-.messages-list::-webkit-scrollbar {
-    width: 6px;
-}
-
-.messages-list::-webkit-scrollbar-thumb {
-    background: var(--glass-border);
-    border-radius: 999px;
-}
-
-.messages-list::-webkit-scrollbar-thumb:hover {
-    background: var(--primary);
-}
-
-/* Each message card (uses existing .glass-card) */
-.messages-list .glass-card {
-    cursor: pointer;
-    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
-}
-
-/* Hover effect on message card */
-.messages-list .glass-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--primary);
-    background: rgba(255, 255, 255, 0.04);
-}
-
-/* Flex between already exists, just make sure align-items is okay here */
-.messages-list .flex-between {
-    align-items: flex-start;
-}
+/* This is from where i copied message.css */
 
 /* ---------- Utility classes used in your HTML ---------- */
+
+
+
 
 /* Spacing utilities */
 .p-6 {
@@ -978,6 +924,205 @@ button.loading {
     font-size: 1.5rem;
     font-weight: 1200;
     color:#6366F1;
-    margin-left: 5rem;
 
+}
+
+
+/* ========================================= bottom navigation ======================================== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(10px);
+
+  padding: 8px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  z-index: 1000;
+}
+
+.bottom-nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  color: #94a3b8;
+  text-decoration: none;
+}
+
+.bottom-nav a i {
+  font-size: 18px;
+  margin-bottom: 2px;
+}
+
+.bottom-nav a:hover {
+  color: #6366f1;
+}
+/* defoult (desltop) */
+.bottom-nav {
+  display: none;
+}
+
+
+/* New Media Queries */
+/* ================= MOBILE (CLEAN APP UI) ================= */
+
+@media (max-width: 480px) {
+
+    /* ===== GLOBAL SAFETY (prevents overflow) ===== */
+    html, body {
+        overflow-x: hidden;
+    }
+
+    img, video, iframe {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* ===== CONSISTENT SPACING SYSTEM ===== */
+    .nav-container,
+    .hero-content,
+    .section,
+    .contact-wrapper,
+    .projects-grid,
+    .services-grid,
+    .testimonials-grid,
+    .section-header-row {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    /* ===== NAVBAR ===== */
+    .nav-links { display: none; }
+    .hamburger { display: block; }
+
+    .navbar {
+        height: 60px;
+    }
+
+    .logo {
+        margin-left: 0;
+        font-size: 1.2rem;
+    }
+
+    /* ===== HERO ===== */
+    .hero-content {
+        max-width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+        line-height: 1.3;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .cta-group {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .contact-blob {
+        width: 300px;
+        height: 300px;
+    }
+    /* ===== ABOUT ===== */
+    #about-container {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 0;
+    }
+
+    .stats-grid {
+        display: flex;
+        gap: 1rem;
+        margin-left: 0;
+    }
+
+    .about-stats h2 {
+        margin-left: 0;
+    }
+    .about-flex {
+    gap: 20px;
+  }
+
+    /* ===== GRID SYSTEM ===== */
+    .services-grid,
+    .testimonials-grid,
+    .footer-grid,
+    .projects-grid {
+        grid-template-columns: 1fr;
+        margin: 0;
+    }
+
+    .projects-grid {
+        gap: 1.5rem;
+    }
+
+    .project-img {
+        height: 180px;
+    }
+
+    /* ===== CARDS ===== */
+    .glass-card {
+        padding: 16px;
+        border-radius: 16px;
+    }
+
+    /* ===== SECTION SPACING ===== */
+    .section {
+        padding-top: 48px;
+        padding-bottom: 48px;
+    }
+
+    /* ===== TEXT ===== */
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .section-header p {
+        font-size: 1rem;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+        min-height: 44px;
+        border-radius: 12px;
+        font-size: 16px;
+    }
+
+    /* ===== BOTTOM NAV ===== */
+    .bottom-nav {
+        display: flex;
+        padding: 10px 16px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer-grid {
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .footer-brand {
+        margin-left: 0;
+    }
+}
+
+.container {
+  padding: 0 16px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+@media (max-width: 480px) {
+  .contact-wrapper {
+    padding: 1.5rem;
+  }
 }

@@ -1,0 +1,11 @@
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 2.5rem;
+    z-index: 10;
+}
+
+.error-message {
+    color: #ef4444;
+    text-align: center;
+}
